@@ -17,6 +17,7 @@
 #  define BUFFER_SIZE 15
 # endif
 
+# include "../../../inc/cubed.h"
 # include <unistd.h>
 # include <fcntl.h>
 # include <stdio.h>

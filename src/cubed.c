@@ -1,22 +1,19 @@
 #include "../inc/cubed.h"
 
-void    ft_error(char *str)
-{
-    printf("Error\n%s\n", str);
-    exit (1);
-}
-
 void    get_file(char **argv, t_game *game)
 {
     int fd;
     char *buf;
+    int ret;
 
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		ft_error("The map could not be read.");
     buf = get_map(fd);
-    printf("%s", buf);
-    check_nswe(buf, game);
+    printf("%s", buf); // a retirer
+    ret = check_nswe(buf, game);
+    if (ret != 0)
+        ft_error_code(ret);
     close(fd);
 }
 

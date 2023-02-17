@@ -1,6 +1,6 @@
 #include "../inc/cubed.h"
 
-void check_nswe(char *line, t_game *game)
+char *check_nswe(char *line, t_game *game)
 {
     int i;
 
@@ -10,7 +10,7 @@ void check_nswe(char *line, t_game *game)
         if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W' || line[i] == 'E')
         {
             if (game->orientation != 0)
-                ft_error("There can only be 1 player");
+                return(TOO_MUCH_PL);
             if (line[i] == 'N')
                 game->orientation = NORTH;
             if (line[i] == 'S')
@@ -21,11 +21,12 @@ void check_nswe(char *line, t_game *game)
                 game->orientation = WEST;
         }
         else if (line[i] != '1' && line[i] != '0' && line[i] != ' ' && line[i] != '\n')
-            ft_error("Map can only be '1', '0', ' ', 'W', 'E', 'S', 'N'");
+            return(WRONG_FILL);
         i++;
     }
     if (game->orientation == 0)
-        ft_error("There must be 1 player");
+        return(NO_PL);
+    return (0);
 }
 
 int check_line(char *line)

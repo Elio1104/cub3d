@@ -10,13 +10,13 @@ void check_nswe(char *line, t_game *game)
         if ((line[i] == 'N' || line[i] == 'S' || line[i] == 'W' || line[i] == 'E') && game->orientation == 0)
         {
             if (line[i] == 'N')
-                game->orientation == NORTH;
+                game->orientation = NORTH;
             if (line[i] == 'S')
-                game->orientation == SOUTH;
+                game->orientation = SOUTH;
             if (line[i] == 'E')
-                game->orientation == EAST;
+                game->orientation = EAST;
             if (line[i] == 'W')
-                game->orientation == WEST;
+                game->orientation = WEST;
         }
         else if (line[i] != '1' && line[i] != '0' && line[i] != ' ' && line[i] != '\n')
             ft_error("Map can only be '1', '0', ' ', 'W', 'E', 'S', 'N'");

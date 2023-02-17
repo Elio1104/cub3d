@@ -23,7 +23,7 @@ typedef struct s_game {
 
 //main
 void    ft_error(char *str);
-void    get_map(char **map, char **argv);
+void    get_file(char **map, char **argv);
 void	checking_arg(int argc, char **argv);
 
 #endif

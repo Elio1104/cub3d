@@ -3,6 +3,7 @@
 
 # include <stdio.h>
 # include <stdlib.h>
+# include <fcntl.h>
 
 //main
 void    ft_error(char *str);

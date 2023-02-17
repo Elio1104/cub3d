@@ -22,9 +22,12 @@ void    get_file(char **argv, t_game *game)
 
 void	checking_arg(int argc, char **argv)
 {
+    int len;
+
 	if (argc != 2)
 		ft_error("Invalid number of arguments. Must be 2.");
-	if (!ft_strnstr(argv[1], ".cub", ft_strlen(argv[1])))
+    len = ft_strlen(argv[1]) - 4;
+	if (ft_strcmp(argv[1] + len, ".cub"))
 		ft_error("Invalid file type. Must be: \"<name>.cub\"");
 }
 

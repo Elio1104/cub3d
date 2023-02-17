@@ -6,17 +6,17 @@ void    ft_error(char *str)
     exit (1);
 }
 
-void    get_file(char **map, char **argv)
+void    get_file(char **argv, t_game *game)
 {
     int fd;
     char *buf;
 
-    (void)map;
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		ft_error("The map could not be read.");
     buf = get_map(fd);
     printf("%s", buf);
+    check_nswe(buf, game);
     close(fd);
 }
 
@@ -30,9 +30,11 @@ void	checking_arg(int argc, char **argv)
 
 int main(int argc, char **argv)
 {
+    t_game game;
     char **map;
 
+    game->orientation = 0;
     map = NULL;
     checking_arg(argc, argv);
-    get_file(map, argv);
+    get_file(argv, &game);
 }

@@ -19,12 +19,18 @@ typedef struct s_texture {
 
 typedef struct s_game {
     char        **map;
+    int         orientation;
     t_texture   texture;
 }   t_game;
 
+# define NORTH 1;
+# define SOUTH 2;
+# define EAST 3;
+# define WEST 4;
+
 //main
 void    ft_error(char *str);
-void    get_file(char **map, char **argv);
+void    get_file(char **argv, t_game *game);
 void	checking_arg(int argc, char **argv);
 
 //map

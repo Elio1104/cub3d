@@ -71,7 +71,7 @@ static char	*output(char **str, int ret)
 	if (ret < 0)
 		return (NULL);
 	else if (ret == 0 && *str == NULL)
-		ft_error ("Malloc failed");
+		return(ft_error ("Malloc failed"));
 	else
 		return (cut_function(&(*str)));
 }

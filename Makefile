@@ -29,7 +29,7 @@ WHITE		=	\033[0;97m
 # Sources
 
 MAIN_DIR	=	./
-MAIN_FILES	=	cubed
+MAIN_FILES	=	cubed map
 
 SRC_FILES+=$(addprefix $(MAIN_DIR),$(MAIN_FILES))
 

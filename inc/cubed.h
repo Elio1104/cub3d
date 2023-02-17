@@ -26,4 +26,8 @@ void    ft_error(char *str);
 void    get_file(char **map, char **argv);
 void	checking_arg(int argc, char **argv);
 
+//map
+int check_line(char *line);
+char *get_map(int fd);
+
 #endif

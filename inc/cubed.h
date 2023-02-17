@@ -9,6 +9,18 @@
 # include <fcntl.h>
 # include <unistd.h>
 
+typedef struct s_texture {
+    char    *north;
+    char    *south;
+    char    *east;
+    char    *west;
+}   t_texture;
+
+typedef struct s_game {
+    char        **map;
+    t_texture   texture;
+}   t_game;
+
 //main
 void    ft_error(char *str);
 void    get_map(char **map, char **argv);

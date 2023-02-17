@@ -24,6 +24,8 @@ void check_nswe(char *line, t_game *game)
             ft_error("Map can only be '1', '0', ' ', 'W', 'E', 'S', 'N'");
         i++;
     }
+    if (game->orientation == 0)
+        ft_error("There must be 1 player");
 }
 
 int check_line(char *line)

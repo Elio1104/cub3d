@@ -10,6 +10,7 @@ void    get_map(char **map, char **argv)
 {
     int fd;
 
+    (void)map;
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		ft_error("The map could not be read.");
@@ -29,6 +30,7 @@ int main(int argc, char **argv)
 {
     char **map;
 
+    map = NULL;
     checking_arg(argc, argv);
     get_map(map, argv);
 }

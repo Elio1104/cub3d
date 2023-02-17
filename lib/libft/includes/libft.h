@@ -58,6 +58,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
 void	*ft_memmove(void *dst, const void *src, size_t len);
+int		ft_strcmp(char *s1, char *s2);
 
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);

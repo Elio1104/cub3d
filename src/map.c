@@ -54,9 +54,8 @@ char *get_map(int fd)
         line = get_next_line(fd);
         if (check_line(line) != 0)
             break ;
+        free(line);
     }
-    if (check_line(line) == 2)
-        ft_error("Invalid map area");
     while (1)
     {
         buffer = get_next_line(fd);

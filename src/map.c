@@ -7,8 +7,10 @@ void check_nswe(char *line, t_game *game)
     i = 0;
     while(line[i])
     {
-        if ((line[i] == 'N' || line[i] == 'S' || line[i] == 'W' || line[i] == 'E') && game->orientation == 0)
+        if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W' || line[i] == 'E')
         {
+            if (game->orientation != 0)
+                ft_error("There can only be 1 player");
             if (line[i] == 'N')
                 game->orientation = NORTH;
             if (line[i] == 'S')

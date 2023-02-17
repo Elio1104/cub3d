@@ -9,7 +9,7 @@ int check_line(char *line)
         return (2); //vide
     while (line[i])
     {
-        if (line[i] != ' ' || line[i] != '\n')
+        if (line[i] != ' ' && line[i] != '\n')
             return (1);//line remplie
         i++;
     }

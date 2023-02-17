@@ -36,5 +36,6 @@ void	checking_arg(int argc, char **argv);
 //map
 int check_line(char *line);
 char *get_map(int fd);
+void check_nswe(char *line, t_game *game);
 
 #endif

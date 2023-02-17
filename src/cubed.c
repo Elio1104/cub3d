@@ -31,10 +31,8 @@ void	checking_arg(int argc, char **argv)
 int main(int argc, char **argv)
 {
     t_game game;
-    char **map;
 
     game.orientation = 0;
-    map = NULL;
     checking_arg(argc, argv);
     get_file(argv, &game);
 }

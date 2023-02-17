@@ -6,7 +6,7 @@ void    ft_error(char *str)
     exit (1);
 }
 
-void    get_map(char **map, char *file)
+void    get_map(char **map, char **argv)
 {
     int fd;
 
@@ -30,5 +30,5 @@ int main(int argc, char **argv)
     char **map;
 
     checking_arg(argc, argv);
-    get_map(map, argv[1]);
+    get_map(map, argv);
 }

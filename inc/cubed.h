@@ -3,6 +3,7 @@
 
 # include "../lib/libft/includes/libft.h"
 # include "../lib/libft/includes/ft_printf.h"
+# include "../lib/libft/includes/get_next_line.h"
 
 # include <stdio.h>
 # include <stdlib.h>

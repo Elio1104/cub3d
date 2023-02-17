@@ -11,11 +11,12 @@ void    get_file(char **map, char **argv)
     int fd;
     char *buf;
 
+    (void)map;
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		ft_error("The map could not be read.");
     buf = get_map(fd);
-    printf(buf);
+    printf("%s", buf);
     close(fd);
 }
 

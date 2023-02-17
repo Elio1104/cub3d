@@ -1,6 +1,6 @@
 #include "../inc/cubed.h"
 
-void ft_error(char *str)
+void    ft_error(char *str)
 {
     printf("Error\n%s\n", str);
     exit (1);

@@ -15,7 +15,7 @@ void    check_layout(t_game *game)
             {
                 if(i == 0 || !(game->map[i - 1][j]) || (game->map[i - 1][j] && game->map[i - 1][j] == ' '))
                     ft_error_code(WRONG_LAYOUT, game);
-                if(!game->map[i] || !(game->map[i + 1][j]) || (game->map[i + 1][j] && game->map[i + 1][j] == ' '))
+                if(!game->map[i + 1] || !(game->map[i + 1][j]) || (game->map[i + 1][j] && game->map[i + 1][j] == ' '))
                     ft_error_code(WRONG_LAYOUT, game);
                 if(!(game->map[i][j + 1]) || (game->map[i][j + 1] && game->map[i][j + 1] == ' '))
                     ft_error_code(WRONG_LAYOUT, game);

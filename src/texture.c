@@ -73,10 +73,11 @@ void get_texture(t_game *game)
             continue ;
         }
         if(!is_texture(game, line))
+        {
+            free(line);
             break;
+        }
         free(line);
     }
-    if (line)
-        free(line);
     check_texture(game);
 }

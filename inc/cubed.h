@@ -43,6 +43,7 @@ void	checking_arg(int argc, char **argv, t_game *game);
 //map
 char    **get_map(int fd, char *line);
 int     check_nswe(t_game *game);
+void    check_layout(t_game *game);
 
 //texture
 void free_close(char *str, char **tab);

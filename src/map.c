@@ -34,22 +34,6 @@ int check_nswe(t_game *game)
     return (0);
 }
 
-int check_line(char *line)
-{
-    int i;
-
-    i = 0;
-    if (!line)
-        return (2); //vide
-    while (game->map[i][j])
-    {
-        if (game->map[i][j] != ' ' && game->map[i][j] != '\n')
-            return (1);//line remplie
-        i++;
-    }
-    return (0); //que des espaces
-}
-
 char **get_map(int fd, char *line)
 {
     char    *buffer;

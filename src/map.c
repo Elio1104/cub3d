@@ -13,13 +13,13 @@ void    check_layout(t_game *game)
         {
             if(game->map[i][j] == '0')
             {
-                if(&(game->map[i - 1][j]) && game->map[i][j] == ' ')
+                if(!(&(game->map[i - 1][j])) || (&(game->map[i - 1][j]) && game->map[i - 1][j] == ' '))
                     ft_error_code(WRONG_LAYOUT, game);
-                if(&(game->map[i + 1][j]) && game->map[i][j] == ' ')
+                if(!(&(game->map[i + 1][j])) || (&(game->map[i + 1][j]) && game->map[i + 1][j] == ' '))
                     ft_error_code(WRONG_LAYOUT, game);
-                if(&(game->map[i][j + 1]) && game->map[i][j] == ' ')
+                if(!(&(game->map[i][j + 1])) || (&(game->map[i][j + 1]) && game->map[i][j + 1] == ' '))
                     ft_error_code(WRONG_LAYOUT, game);
-                if(&(game->map[i][j - 1]) && game->map[i][j] == ' ')
+                if(!(&(game->map[i][j - 1])) || (&(game->map[i][j - 1]) && game->map[i][j - 1] == ' '))
                     ft_error_code(WRONG_LAYOUT, game);
             }
             j++;

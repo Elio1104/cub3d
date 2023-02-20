@@ -30,6 +30,8 @@ void free_texture(t_game *game)
 
 void free_struct(t_game *game)
 {
+    if (game->map)
+        free_tab(game->map);
     if (game->fd != 0)
         close(game->fd);
     free_texture(game);

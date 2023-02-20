@@ -9,15 +9,11 @@ void    get_file(char **argv, t_game *game)
 	if (game->fd == -1)
 		ft_error("The map could not be read.", game);
     buf = get_texture(game);
-    buf = get_map(game->fd, buf);
+    game->map = get_map(game->fd, buf);
     printf("%s", buf); // a retirer
-    ret = check_nswe(buf, game);
+    ret = check_nswe(game);
     if (ret != 0)
-    {
-        free(buf);
         ft_error_code(ret, game);
-    }
-    free(buf);
     close(game->fd);
     game->fd = 0;
 }

@@ -38,7 +38,7 @@ typedef struct s_game {
 
 //main
 void    get_file(char **argv, t_game *game);
-void	checking_arg(int argc, char **argv);
+void	checking_arg(int argc, char **argv, t_game *game);
 
 //map
 int     check_line(char *line);
@@ -46,7 +46,7 @@ char    *get_map(int fd);
 int   check_nswe(char *line, t_game *game);
 
 //texture
-void free_close(t_game *game, char *str, char **tab);
+void free_close(char *str, char **tab);
 void    stock_texture(t_game *game, char **tab, char **texture, char *line);
 int is_texture(t_game *game, char **tab, char *line);
 void check_texture(t_game *game);
@@ -65,8 +65,8 @@ void free_texture(t_game *game);
 void free_struct(t_game *game);
 
 //error
-void    ft_error(char *str);
-void    ft_error_code(int code);
+void    ft_error(char *str, t_game *game);
+void    ft_error_code(int code, t_game *game);
 char    *code_erreur(int code);
 
 #endif

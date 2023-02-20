@@ -11,7 +11,7 @@ void    check_layout(t_game *game)
         j = 0;
         while(game->map[i][j])
         {
-            if(game->map[i][j] == '0')
+            if(game->map[i][j] == '0' || game->map[i][j] == 'N' || game->map[i][j] == 'S' || game->map[i][j] == 'W' || game->map[i][j] == 'E')
             {
                 if(i == 0 || !(game->map[i - 1][j]) || (game->map[i - 1][j] && game->map[i - 1][j] == ' '))
                     ft_error_code(WRONG_LAYOUT, game);

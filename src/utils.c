@@ -29,7 +29,7 @@ void free_texture(t_game *game)
 
 void free_struct(t_game *game)
 {
-    if (fd != 0)
+    if (game->fd != 0)
         close(fd);
     free_texture(game);
 }

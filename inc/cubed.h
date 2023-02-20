@@ -48,7 +48,7 @@ int     check_nswe(t_game *game);
 void free_close(char *str, char **tab);
 void    stock_texture(t_game *game, char **tab, char **texture, char *line);
 int is_texture(t_game *game, char *line);
-void check_texture(t_game *game);
+void check_texture(t_game *game, char *line);
 char *get_texture(t_game *game);
 
 //rgb

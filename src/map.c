@@ -45,20 +45,10 @@ int check_line(char *line)
     return (0); //que des espaces
 }
 
-char *get_map(int fd)
+char *get_map(int fd, char *line)
 {
     char    *buffer;
-    char    *line;
 
-    if (fd < 1)
-        return (NULL);
-    while (1)
-    {
-        line = get_next_line(fd);
-        if (check_line(line) != 0)
-            break ;
-        free(line);
-    }
     while (1)
     {
         buffer = get_next_line(fd);

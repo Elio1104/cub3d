@@ -8,8 +8,8 @@ void    get_file(char **argv, t_game *game)
 	game->fd = open(argv[1], O_RDONLY);
 	if (game->fd == -1)
 		ft_error("The map could not be read.", game);
-    get_texture(game);
-    buf = get_map(game->fd);
+    buf = get_texture(game);
+    buf = get_map(game->fd, buf);
     printf("%s", buf); // a retirer
     ret = check_nswe(buf, game);
     if (ret != 0)

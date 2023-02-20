@@ -42,7 +42,7 @@ void	checking_arg(int argc, char **argv, t_game *game);
 
 //map
 int     check_line(char *line);
-char    *get_map(int fd);
+char    *get_map(int fd, char *line);
 int   check_nswe(char *line, t_game *game);
 
 //texture
@@ -50,7 +50,7 @@ void free_close(char *str, char **tab);
 void    stock_texture(t_game *game, char **tab, char **texture, char *line);
 int is_texture(t_game *game, char *line);
 void check_texture(t_game *game);
-void get_texture(t_game *game);
+char *get_texture(t_game *game);
 
 //rgb
 int line_not_empty(char *str);

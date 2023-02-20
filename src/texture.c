@@ -58,7 +58,7 @@ void check_texture(t_game *game)
         ft_error("Not enough texture", game);
 }
 
-void get_texture(t_game *game)
+char    *get_texture(t_game *game)
 {
     char *line;
 
@@ -74,11 +74,9 @@ void get_texture(t_game *game)
             continue ;
         }
         if(!is_texture(game, line))
-        {
-            free(line);
             break;
-        }
         free(line);
     }
     check_texture(game);
+    return (line);
 }

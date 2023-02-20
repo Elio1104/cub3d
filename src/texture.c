@@ -21,8 +21,10 @@ void    stock_texture(t_game *game, char **tab, char **texture, char *line)
     }
 }
 
-int is_texture(t_game *game, char **tab, char *line)
+int is_texture(t_game *game, char *line)
 {
+    char **tab;
+
     tab = ft_split(line, ' ');
     if(!tab)
     {
@@ -42,7 +44,11 @@ int is_texture(t_game *game, char **tab, char *line)
     else if(ft_strcmp(tab[0], "C") == 0)
         stock_rgb(game, tab, &game->texture.floor, line);
     else
+    {
+        free_tab(tab);
         return(0);
+    }
+    free_tab(tab);
     return(1);
 }
 
@@ -55,9 +61,7 @@ void check_texture(t_game *game)
 void get_texture(t_game *game)
 {
     char *line;
-    char **tab;
 
-    tab = NULL;
     while(1)
     {
         line = get_next_line(game->fd);
@@ -68,13 +72,11 @@ void get_texture(t_game *game)
             free(line);
             continue ;
         }
-        if(!is_texture(game, tab, line))
+        if(!is_texture(game, line))
             break;
         free(line);
-        free_tab(tab);
     }
     if (line)
         free(line);
-    free_tab(tab);
     check_texture(game);
 }

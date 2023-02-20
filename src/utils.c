@@ -30,6 +30,6 @@ void free_texture(t_game *game)
 void free_struct(t_game *game)
 {
     if (game->fd != 0)
-        close(fd);
+        close(game->fd);
     free_texture(game);
 }

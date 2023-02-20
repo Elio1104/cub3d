@@ -46,7 +46,7 @@ char **get_map(int fd, char *line)
             break ;
         line = ft_strjoin(line, buffer);
     }
-    map = ft_split(line, '\n'):
+    map = ft_split(line, '\n');
     free(line);
     return (map);
 }

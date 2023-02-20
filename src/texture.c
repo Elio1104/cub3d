@@ -52,10 +52,13 @@ int is_texture(t_game *game, char *line)
     return(1);
 }
 
-void check_texture(t_game *game)
+void check_texture(t_game *game, char *line)
 {
     if(game->texture.ceilling == -1 || game->texture.floor == -1 || game->texture.south == NULL || game->texture.north == NULL || game->texture.east == NULL || game->texture.west == NULL)
+    {
+        free(line);
         ft_error("Not enough texture", game);
+    }
 }
 
 char    *get_texture(t_game *game)
@@ -76,6 +79,6 @@ char    *get_texture(t_game *game)
             break;
         free(line);
     }
-    check_texture(game);
+    check_texture(game, line);
     return (line);
 }

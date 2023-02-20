@@ -1,6 +1,6 @@
 #include "../inc/cubed.h"
 
-char *check_nswe(char *line, t_game *game)
+int check_nswe(char *line, t_game *game)
 {
     int i;
 

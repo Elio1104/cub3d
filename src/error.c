@@ -22,4 +22,5 @@ char *code_erreur(int code)
         return("Map can only be '1', '0', ' ', 'W', 'E', 'S', 'N'");
     if (code == 104)
         return("Wrong layout, map must be closed");
+    return(NULL);
 }

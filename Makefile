@@ -29,7 +29,7 @@ WHITE		=	\033[0;97m
 # Sources
 
 MAIN_DIR	=	./
-MAIN_FILES	=	cubed map
+MAIN_FILES	=	cubed map error texture rgb utils
 
 SRC_FILES+=$(addprefix $(MAIN_DIR),$(MAIN_FILES))
 
@@ -76,6 +76,6 @@ fclean:		clean
 			@$(ECHO) -n "$(CYAN)[cub3d]:\texec. files$(DEF_COLOR)$(GREEN)  => Cleaned!$(DEF_COLOR)\n"
 
 re:			fclean start
-			@$(ECHO) -n "$(GREEN)Cleaned and rebuilt everything for [Minishell]!$(DEF_COLOR)\n"
+			@$(ECHO) -n "$(GREEN)Cleaned and rebuilt everything for [cub3D]!$(DEF_COLOR)\n"
 
 .PHONY:		start all clean fclean re

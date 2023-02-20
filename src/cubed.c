@@ -2,19 +2,19 @@
 
 void    get_file(char **argv, t_game *game)
 {
-    int fd;
     char *buf;
     int ret;
 
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
+	game->fd = open(argv[1], O_RDONLY);
+	if (game->fd == -1)
 		ft_error("The map could not be read.");
-    buf = get_map(fd);
+    get_texture(game);
+    buf = get_map(game->fd);
     printf("%s", buf); // a retirer
     ret = check_nswe(buf, game);
     if (ret != 0)
         ft_error_code(ret);
-    close(fd);
+    close(game->fd);
 }
 
 void	checking_arg(int argc, char **argv)
@@ -33,6 +33,13 @@ int main(int argc, char **argv)
     t_game game;
 
     game.orientation = 0;
+    game.texture.ceilling = -1;
+    game.texture.floor = -1;
+    game.texture.north = NULL;
+    game.texture.south = NULL;
+    game.texture.east = NULL;
+    game.texture.west = NULL;
     checking_arg(argc, argv);
     get_file(argv, &game);
+    free_struct(&game);
 }

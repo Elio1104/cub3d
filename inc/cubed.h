@@ -15,10 +15,13 @@ typedef struct s_texture {
     char    *south;
     char    *east;
     char    *west;
+    int     floor;
+    int     ceilling;
 }   t_texture;
 
 typedef struct s_game {
     char        **map;
+    int         fd;
     int         orientation;
     t_texture   texture;
 }   t_game;
@@ -40,7 +43,26 @@ void	checking_arg(int argc, char **argv);
 //map
 int     check_line(char *line);
 char    *get_map(int fd);
-void    check_nswe(char *line, t_game *game);
+int   check_nswe(char *line, t_game *game);
+
+//texture
+void free_close(t_game *game, char *str, char **tab);
+void    stock_texture(t_game *game, char **tab, char **texture, char *line);
+int is_texture(t_game *game, char **tab, char *line);
+void check_texture(t_game *game);
+void get_texture(t_game *game);
+
+//rgb
+int line_not_empty(char *str);
+int	create_trgb(int t, int r, int g, int b);
+int get_rgb(char **tab);
+void stock_rgb(t_game *game, char **tab, int *rgb, char *line);
+
+
+//utils
+void free_tab(char **tab);
+void free_texture(t_game *game);
+void free_struct(t_game *game);
 
 //error
 void    ft_error(char *str);

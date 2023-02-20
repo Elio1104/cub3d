@@ -43,30 +43,26 @@ void stock_rgb(t_game *game, char **tab, int *rgb, char *line)
 
     if(!tab[0] || !tab[1] || tab[2])
     {
-        free_close(game, line, tab);
-        free_struct(game);
-        ft_error("Wrong texture argument");
+        free_close(line, tab);
+        ft_error("Wrong texture argument", game);
     }
     new_tab = ft_split(tab[1], ',');
     if(!new_tab)
     {
-        free_close(game, line, tab);
-        free_struct(game);
-        ft_error("Malloc ft_split failed");
+        free_close(line, tab);
+        ft_error("Malloc ft_split failed", game);
     }
     if(!new_tab[0] || !new_tab[1] || !new_tab[2] || new_tab[3])
     {
         free_tab(new_tab);
-        free_close(game, line, tab);
-        free_struct(game);
-        ft_error("Wrong rgb");
+        free_close(line, tab);
+        ft_error("Wrong rgb", game);
     }
     *rgb = get_rgb(new_tab);
     free_tab(new_tab);
     if(*rgb == -1)
     {
-        free_struct(game);
-        free_close(game, line, tab);
-        ft_error("Wrong rgb");
+        free_close(line, tab);
+        ft_error("Wrong rgb", game);
     }
 }

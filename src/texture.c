@@ -1,9 +1,8 @@
 #include "../inc/cubed.h"
 
-void free_close(t_game *game, char *str, char **tab)
+void free_close(char *str, char **tab)
 {
     free(str);
-    close(game->fd);
     free_tab(tab);
 }
 
@@ -11,16 +10,14 @@ void    stock_texture(t_game *game, char **tab, char **texture, char *line)
 {
     if(!tab[0] || !tab[1] || tab[2])
     {
-        free_close(game, line, tab);
-        free_struct(game);
-        ft_error("Wrong arguments");
+        free_close(line, tab);
+        ft_error("Wrong arguments", game);
     }
     *texture = ft_strdup(tab[1]);
     if(!*texture)
     {
-        free_close(game, line, tab);
-        free_struct(game);
-        ft_error("Malloc in ft_strdup failed");
+        free_close(line, tab);
+        ft_error("Malloc in ft_strdup failed", game);
     }
 }
 
@@ -29,9 +26,8 @@ int is_texture(t_game *game, char **tab, char *line)
     tab = ft_split(line, ' ');
     if(!tab)
     {
-        free_close(game, line, 0);
-        free_struct(game);
-        ft_error("Malloc split failed");
+        free_close(line, 0);
+        ft_error("Malloc split failed", game);
     }
     if(ft_strcmp(tab[0], "NO") == 0)
         stock_texture(game, tab, &game->texture.north, line);
@@ -53,11 +49,7 @@ int is_texture(t_game *game, char **tab, char *line)
 void check_texture(t_game *game)
 {
     if(game->texture.ceilling == -1 || game->texture.floor == -1 || game->texture.south == NULL || game->texture.north == NULL || game->texture.east == NULL || game->texture.west == NULL)
-    {
-        close(game->fd);
-        free_struct(game);
-        ft_error("Not enough texture");
-    }
+        ft_error("Not enough texture", game);
 }
 
 void get_texture(t_game *game)

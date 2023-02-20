@@ -50,7 +50,7 @@ int check_line(char *line)
     return (0); //que des espaces
 }
 
-char *get_map(int fd, char *line)
+char **get_map(int fd, char *line)
 {
     char    *buffer;
     char    **map;

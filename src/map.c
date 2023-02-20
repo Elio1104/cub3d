@@ -8,6 +8,7 @@ int check_nswe(t_game *game)
     i = 0;
     while(game->map[i])
     {
+        j = 0;
         while(game->map[i][j])
         {
             if (game->map[i][j] == 'N' || game->map[i][j] == 'S' || game->map[i][j] == 'W' || game->map[i][j] == 'E')

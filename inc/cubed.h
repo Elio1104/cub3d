@@ -62,6 +62,7 @@ void stock_rgb(t_game *game, char **tab, int *rgb, char *line);
 void free_tab(char **tab);
 void free_texture(t_game *game);
 void free_struct(t_game *game);
+void print_map(char **map);
 
 //error
 void    ft_error(char *str, t_game *game);

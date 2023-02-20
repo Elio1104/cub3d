@@ -10,6 +10,7 @@ void    get_file(char **argv, t_game *game)
 		ft_error("The map could not be read.", game);
     buf = get_texture(game);
     game->map = get_map(game->fd, buf);
+    print_map(game->map);
     ret = check_nswe(game);
     if (ret != 0)
         ft_error_code(ret, game);

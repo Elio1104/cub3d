@@ -36,3 +36,12 @@ void free_struct(t_game *game)
         close(game->fd);
     free_texture(game);
 }
+
+void print_map(char **map)
+{
+    int i;
+
+    i = 0;
+    while (map[i])
+        printf(map[i++]);
+}

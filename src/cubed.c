@@ -14,7 +14,9 @@ void    get_file(char **argv, t_game *game)
     ret = check_nswe(buf, game);
     if (ret != 0)
         ft_error_code(ret, game);
+    free(buf);
     close(game->fd);
+    game->fd = 0;
 }
 
 void	checking_arg(int argc, char **argv, t_game *game)

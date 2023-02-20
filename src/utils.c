@@ -13,6 +13,7 @@ void free_tab(char **tab)
             i++;
         }
     }
+    free(tab);
 }
 
 void free_texture(t_game *game)

@@ -28,7 +28,7 @@ int is_texture(t_game *game, char *line)
     tab = ft_split(line, ' ');
     if(!tab)
     {
-        free_close(line, 0);
+        free(line);
         ft_error("Malloc split failed", game);
     }
     if(ft_strcmp(tab[0], "NO") == 0)
@@ -65,6 +65,7 @@ void get_texture(t_game *game)
     while(1)
     {
         line = get_next_line(game->fd);
+        printf("%s", line);
         if(!line)
             break;
         if(line_not_empty(line) == 0 || line[0] == '\n')

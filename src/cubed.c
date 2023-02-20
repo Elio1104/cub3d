@@ -13,7 +13,10 @@ void    get_file(char **argv, t_game *game)
     printf("%s", buf); // a retirer
     ret = check_nswe(buf, game);
     if (ret != 0)
+    {
+        free(buf);
         ft_error_code(ret, game);
+    }
     free(buf);
     close(game->fd);
     game->fd = 0;

@@ -37,6 +37,13 @@ void free_struct(t_game *game)
     free_texture(game);
 }
 
+double ft_abs(double x)
+{
+    if (x >= 0)
+      return (x);
+    return (-x);
+}
+
 void print_map(char **map)
 {
     int i;

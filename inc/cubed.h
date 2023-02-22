@@ -4,7 +4,7 @@
 # include "../lib/libft/includes/libft.h"
 # include "../lib/libft/includes/ft_printf.h"
 # include "../lib/libft/includes/get_next_line.h"
-
+# include "../lib/mlx/mlx.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -19,17 +19,48 @@ typedef struct s_texture {
     int     ceilling;
 }   t_texture;
 
+typedef struct s_raycasting {
+    double ray_x;
+    double ray_y;
+    double camera_x;
+    int map_x;
+    int map_y;
+    int step_x;
+    int step_y;
+    double sideDistX;
+    double sideDistY;
+    double deltaDistX;
+    double deltaDistY;
+
+}   t_raycasting;
+
+typedef struct s_player{
+    double x;
+    double y;
+    double dir_x;
+    double dir_y;
+    double plane_x;
+    double plane_y;
+}   t_player;
+
 typedef struct s_game {
     char        **map;
     int         fd;
     int         orientation;
+    void        *mlx;
+    void        *mlx_win;
     t_texture   texture;
+    t_player    player;
+    t_raycasting raycast;
 }   t_game;
 
-# define NORTH 1;
-# define SOUTH 2;
-# define EAST 3;
-# define WEST 4;
+# define NORTH 1
+# define SOUTH 2
+# define EAST 3
+# define WEST 4
+
+# define WIN_WIDTH 1366
+# define WIN_HEIGHT 768
 
 # define NO_PL 101
 # define TOO_MUCH_PL 102
@@ -44,6 +75,9 @@ void	checking_arg(int argc, char **argv, t_game *game);
 char    **get_map(int fd, char *line);
 int     check_nswe(t_game *game);
 void    check_layout(t_game *game);
+
+//raycasting
+void raycasting(t_game *game);
 
 //texture
 void free_close(char *str, char **tab);
@@ -63,6 +97,7 @@ void stock_rgb(t_game *game, char **tab, int *rgb, char *line);
 void free_tab(char **tab);
 void free_texture(t_game *game);
 void free_struct(t_game *game);
+double ft_abs(double x);
 void print_map(char **map);
 
 //error

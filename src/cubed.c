@@ -30,17 +30,44 @@ void	checking_arg(int argc, char **argv, t_game *game)
 		ft_error("Invalid file type. Must be: \"<name>.cub\"", game);
 }
 
+void init_player(t_game *game)
+{
+    game->orientation = 0;
+    game->player.dir_x = 0;
+    game->player.dir_y = 0;
+    game->player.plane_x = 0;
+    game->player.plane_y = 0;
+}
+
 void    init_struct(t_game *game)
 {
     game->map = NULL;
     game->fd = 0;
-    game->orientation = 0;
     game->texture.ceilling = -1;
     game->texture.floor = -1;
     game->texture.north = NULL;
     game->texture.south = NULL;
     game->texture.east = NULL;
     game->texture.west = NULL;
+    init_player(game);
+    game->mlx = mlx_init();
+	if (game->mlx == NULL)
+		ft_error("Error\nMlx doesn't init", game);
+	game->mlx_win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
+}
+
+int close_window(t_game *game)
+{
+    free_struct(game);
+	mlx_destroy_window(game->mlx, game->mlx_win);
+	exit (1);
+}
+
+int key_events(int keycode, t_game *game)
+{
+    if (keycode == 53)
+		close_window(game);
+    return (0);
 }
 
 int main(int argc, char **argv)
@@ -50,5 +77,9 @@ int main(int argc, char **argv)
     init_struct(&game);
     checking_arg(argc, argv, &game);
     get_file(argv, &game);
-    free_struct(&game);
+    raycasting(&game);
+    mlx_hook(game.mlx_win, 2, 0, &key_events, &game);
+	mlx_hook(game.mlx_win, 17, 0, &close_window, &game);
+    mlx_loop(game.mlx);
+    // free_struct(&game);
 }

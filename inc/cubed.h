@@ -96,6 +96,7 @@ typedef struct s_game {
 //main
 void    get_file(char **argv, t_game *game);
 void	checking_arg(int argc, char **argv, t_game *game);
+int close_window(t_game *game);
 
 //map
 char    **get_map(int fd, char *line);
@@ -130,5 +131,12 @@ void print_map(char **map);
 void    ft_error(char *str, t_game *game);
 void    ft_error_code(int code, t_game *game);
 char    *code_erreur(int code);
+
+//keyboard
+int key_events(int keycode, t_game *game);
+void move_cam(int keycode, t_game *game);
+void move_x_player(int keycode, t_game *game);
+void move_y_player(int keycode, t_game *game);
+
 
 #endif

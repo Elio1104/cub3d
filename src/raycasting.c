@@ -22,7 +22,6 @@ int raycasting(t_game *game)
     int i;
     t_raycasting *ray;
 
-    //fill_background(game);
     game->mlx_img.img = mlx_new_image(game->mlx, (int)WIN_WIDTH, (int)WIN_HEIGHT);
     game->mlx_img.addr = mlx_get_data_addr(game->mlx_img.img,
 			&game->mlx_img.bits_per_pixel, &game->mlx_img.line_length,
@@ -31,10 +30,9 @@ int raycasting(t_game *game)
     i = 0;
     while(i < WIN_WIDTH)
     {
-        ray->camera_x = 2 * i / (double)WIN_WIDTH - 1; //x-coordinate in camera space
+        ray->camera_x = 2 * i / (double)WIN_WIDTH - 1;
         ray->ray_x = game->player.dir_x + game->player.plane_x * ray->camera_x;
         ray->ray_y = game->player.dir_y + game->player.plane_y * ray->camera_x;
-        // printf("%f %f\n", ray_x, ray_y);
         ray->map_x = (int)game->player.x;
         ray->map_y = (int)game->player.y;
         if(ray->ray_x == 0)
@@ -68,7 +66,6 @@ int raycasting(t_game *game)
         ray->hit = 0;
         while (ray->hit == 0)
         {
-            //jump to next map square, either in x-direction, or in y-direction
             if (ray->sideDistX < ray->sideDistY)
             {
                 ray->sideDistX += ray->deltaDistX;
@@ -81,7 +78,6 @@ int raycasting(t_game *game)
                 ray->map_y += ray->step_y;
                 ray->side = 1;
             }
-            //Check if ray has hit a wall
             if (game->map[ray->map_y][ray->map_x] == '1') 
             {
                 ray->hit = 1;
@@ -91,11 +87,8 @@ int raycasting(t_game *game)
             ray->wall_distance = (ray->sideDistX - ray->deltaDistX);
         else          
             ray->wall_distance= (ray->sideDistY - ray->deltaDistY);
-        //printf("%d :%f\n", i, ray->wall_distance);
-
         int lineHeight = (int)(WIN_HEIGHT / ray->wall_distance);
 
-        //calculate lowest and highest pixel to fill in current stripe
         int drawStart = -lineHeight / 2 + WIN_HEIGHT / 2;
         if(drawStart < 0)
             drawStart = 0;
@@ -115,5 +108,4 @@ int raycasting(t_game *game)
     mlx_put_image_to_window(game->mlx, game->mlx_win, game->mlx_img.img, 0, 0);
     mlx_destroy_image(game->mlx, game->mlx_img.img);
     return (0);
-    
 }

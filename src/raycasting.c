@@ -1,20 +1,32 @@
 #include "../inc/cubed.h"
 
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int *) dst = color;
+}
+
 void draw_verline(t_game *game, int i, int draw_start, int draw_end, int color)
 {
     while(draw_start <= draw_end)
     {
-        mlx_pixel_put(game->mlx, game->mlx_win, i, draw_start, color);
+        my_mlx_pixel_put(&game->mlx_img, i, draw_start, color);
         draw_start++;
     }
 }
 
-
-void raycasting(t_game *game)
+int raycasting(t_game *game)
 {
     int i;
     t_raycasting *ray;
 
+    //fill_background(game);
+    game->mlx_img.img = mlx_new_image(game->mlx, (int)WIN_WIDTH, (int)WIN_HEIGHT);
+    game->mlx_img.addr = mlx_get_data_addr(game->mlx_img.img,
+			&game->mlx_img.bits_per_pixel, &game->mlx_img.line_length,
+			&game->mlx_img.endian);
     ray = &game->raycast;
     i = 0;
     while(i < WIN_WIDTH)
@@ -79,7 +91,7 @@ void raycasting(t_game *game)
             ray->wall_distance = (ray->sideDistX - ray->deltaDistX);
         else          
             ray->wall_distance= (ray->sideDistY - ray->deltaDistY);
-        printf("%d :%f\n", i, ray->wall_distance);
+        //printf("%d :%f\n", i, ray->wall_distance);
 
         int lineHeight = (int)(WIN_HEIGHT / ray->wall_distance);
 
@@ -93,8 +105,15 @@ void raycasting(t_game *game)
         int color = 16711680;
         if(ray->side == 0)
             color /= 2;
+        if (drawStart != 0)
+            draw_verline(game, i, 0, drawStart, game->texture.ceilling);
+        if (drawEnd != WIN_HEIGHT - 1)
+            draw_verline(game, i, drawEnd , WIN_HEIGHT - 1, game->texture.floor);
         draw_verline(game, i, drawStart, drawEnd, color);
         i++;
     }
+    mlx_put_image_to_window(game->mlx, game->mlx_win, game->mlx_img.img, 0, 0);
+    mlx_destroy_image(game->mlx, game->mlx_img.img);
+    return (0);
     
 }

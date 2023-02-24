@@ -9,6 +9,15 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include <math.h>
+
+typedef struct s_data{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
 
 typedef struct s_texture {
     char    *north;
@@ -47,6 +56,7 @@ typedef struct s_player{
 
 typedef struct s_game {
     char        **map;
+    t_data      mlx_img;
     int         fd;
     int         orientation;
     void        *mlx;
@@ -62,6 +72,16 @@ typedef struct s_game {
 # define WEST 4
 
 # define FOV 0.9
+# define MOVE_SPEED 0.3
+# define ROT_SPEED 0.1
+
+# define ESC 53
+# define UP 13
+# define DOWN 1
+# define LEFT 0
+# define RIGHT 2
+# define CAM_LEFT 123
+# define CAM_RIGHT 124
 
 # define WIN_WIDTH 1366
 # define WIN_HEIGHT 768
@@ -83,7 +103,7 @@ int     check_nswe(t_game *game);
 void    check_layout(t_game *game);
 
 //raycasting
-void raycasting(t_game *game);
+int raycasting(t_game *game);
 
 //texture
 void free_close(char *str, char **tab);

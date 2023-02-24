@@ -65,10 +65,54 @@ int close_window(t_game *game)
 
 int key_events(int keycode, t_game *game)
 {
-    if (keycode == 53)
+    if (keycode == ESC)
 		close_window(game);
-    // if (keycode == 13)
-    //     game->player
+    if (keycode == UP)//z
+    {
+        if(game->map[(int)(game->player.y)][(int)(game->player.x + game->player.dir_x * MOVE_SPEED)] == '0')
+            game->player.x += game->player.dir_x * MOVE_SPEED;
+        if(game->map[(int)(game->player.y + game->player.dir_y * MOVE_SPEED)][(int)(game->player.x)] == '0')
+            game->player.y += game->player.dir_y * MOVE_SPEED;
+    }
+    if (keycode == DOWN)//s
+    {
+        if(game->map[(int)(game->player.y)][(int)(game->player.x - game->player.dir_x * MOVE_SPEED)] == '0')
+            game->player.x -= game->player.dir_x * MOVE_SPEED;
+        if(game->map[(int)(game->player.y - game->player.dir_y * MOVE_SPEED)][(int)(game->player.x)] == '0')
+            game->player.y -= game->player.dir_y * MOVE_SPEED;
+    }
+    if (keycode == LEFT)//q
+    {
+        if(game->map[(int)(game->player.y)][(int)(game->player.x + game->player.dir_y * MOVE_SPEED)] == '0')
+            game->player.x += game->player.dir_y * MOVE_SPEED;
+        if(game->map[(int)(game->player.y - game->player.dir_x * MOVE_SPEED)][(int)(game->player.x)] == '0')
+            game->player.y -= game->player.dir_x * MOVE_SPEED;
+    }
+    if (keycode == RIGHT)//d
+    {
+        if(game->map[(int)(game->player.y)][(int)(game->player.x - game->player.dir_y * MOVE_SPEED)] == '0')
+            game->player.x -= game->player.dir_y * MOVE_SPEED;
+        if(game->map[(int)(game->player.y + game->player.dir_x * MOVE_SPEED)][(int)(game->player.x)] == '0')
+            game->player.y += game->player.dir_x * MOVE_SPEED;
+    }
+    if(keycode == CAM_LEFT)
+    {
+        double oldDirX = game->player.dir_x;
+        game->player.dir_x = game->player.dir_x * cos(-ROT_SPEED) - game->player.dir_y * sin(-ROT_SPEED);
+        game->player.dir_y = oldDirX * sin(-ROT_SPEED) + game->player.dir_y * cos(-ROT_SPEED);
+        double oldPlaneX = game->player.plane_x;
+        game->player.plane_x = game->player.plane_x * cos(-ROT_SPEED) - game->player.plane_y * sin(-ROT_SPEED);
+        game->player.plane_y = oldPlaneX * sin(-ROT_SPEED) + game->player.plane_y * cos(-ROT_SPEED);
+    }
+    if(keycode == CAM_RIGHT)
+    {
+        double oldDirX = game->player.dir_x;
+        game->player.dir_x = game->player.dir_x * cos(ROT_SPEED) - game->player.dir_y * sin(ROT_SPEED);
+        game->player.dir_y = oldDirX * sin(ROT_SPEED) + game->player.dir_y * cos(ROT_SPEED);
+        double oldPlaneX = game->player.plane_x;
+        game->player.plane_x = game->player.plane_x * cos(ROT_SPEED) - game->player.plane_y * sin(ROT_SPEED);
+        game->player.plane_y = oldPlaneX * sin(ROT_SPEED) + game->player.plane_y * cos(ROT_SPEED);
+    }
     return (0);
 }
 
@@ -79,7 +123,7 @@ int main(int argc, char **argv)
     init_struct(&game);
     checking_arg(argc, argv, &game);
     get_file(argv, &game);
-    raycasting(&game);
+    mlx_loop_hook(game.mlx, &raycasting, &game);
     mlx_hook(game.mlx_win, 2, 0, &key_events, &game);
 	mlx_hook(game.mlx_win, 17, 0, &close_window, &game);
     mlx_loop(game.mlx);

@@ -27,11 +27,13 @@ typedef struct s_raycasting {
     int map_y;
     int step_x;
     int step_y;
+    int hit;
+    int side;
     double sideDistX;
     double sideDistY;
     double deltaDistX;
     double deltaDistY;
-
+    double wall_distance;
 }   t_raycasting;
 
 typedef struct s_player{
@@ -59,8 +61,12 @@ typedef struct s_game {
 # define EAST 3
 # define WEST 4
 
+# define FOV 0.9
+
 # define WIN_WIDTH 1366
 # define WIN_HEIGHT 768
+# define texWidth 64
+# define texHeight 64
 
 # define NO_PL 101
 # define TOO_MUCH_PL 102

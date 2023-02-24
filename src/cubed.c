@@ -67,6 +67,8 @@ int key_events(int keycode, t_game *game)
 {
     if (keycode == 53)
 		close_window(game);
+    // if (keycode == 13)
+    //     game->player
     return (0);
 }
 

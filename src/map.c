@@ -33,22 +33,22 @@ void get_player(t_game *game)
     if(game->orientation == NORTH)
     {
         game->player.dir_y = -1;
-        game->player.plane_x = 0.66;
+        game->player.plane_x = (double)FOV;
     }
     else if(game->orientation == SOUTH)
     {
         game->player.dir_y = 1;
-        game->player.plane_x = 0.66;
+        game->player.plane_x = -(double)FOV;
     }
     else if(game->orientation == EAST)
     {
         game->player.dir_x = 1;
-        game->player.plane_y = 0.66;
+        game->player.plane_y = (double)FOV;
     }
     else if(game->orientation == WEST)
     {
         game->player.dir_x = -1;
-        game->player.plane_y = 0.66;
+        game->player.plane_y = -(double)FOV;
     }
 }
 

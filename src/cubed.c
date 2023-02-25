@@ -49,6 +49,12 @@ void    init_struct(t_game *game)
     game->texture.south = NULL;
     game->texture.east = NULL;
     game->texture.west = NULL;
+    game->move.move_up = 0;
+    game->move.move_down = 0;
+    game->move.move_left = 0;
+    game->move.move_right = 0;
+    game->move.cam_left = 0;
+    game->move.cam_right = 0;
     init_player(game);
     game->mlx = mlx_init();
 	if (game->mlx == NULL)

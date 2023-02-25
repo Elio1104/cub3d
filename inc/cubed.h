@@ -28,6 +28,15 @@ typedef struct s_texture {
     int     ceilling;
 }   t_texture;
 
+typedef struct s_move {
+    int move_up;
+    int move_down;
+    int move_left;
+    int move_right;
+    int cam_left;
+    int cam_right;
+}   t_move;
+
 typedef struct s_raycasting {
     double ray_x;
     double ray_y;
@@ -61,6 +70,7 @@ typedef struct s_game {
     int         orientation;
     void        *mlx;
     void        *mlx_win;
+    t_move      move;
     t_texture   texture;
     t_player    player;
     t_raycasting raycast;

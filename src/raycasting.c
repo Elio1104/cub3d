@@ -36,26 +36,26 @@ void init_value(t_game *game, t_raycasting *ray, int i)
 
 void init_side_dist(t_game *game, t_raycasting *ray)
 {
-        if (ray->ray_x < 0)
-        {
-            ray->step_x = -1;
-            ray->sideDistX = (game->player.x - ray->map_x) * ray->deltaDistX;
-        }
-        else
-        {
-            ray->step_x = 1;
-            ray->sideDistX = (ray->map_x + 1.0 - game->player.x) * ray->deltaDistX;
-        }
-        if (ray->ray_y < 0)
-        {
-            ray->step_y = -1;
-            ray->sideDistY = (game->player.y - ray->map_y) * ray->deltaDistY;
-        }
-        else
-        {
-            ray->step_y = 1;
-            ray->sideDistY = (ray->map_y + 1.0 - game->player.y) * ray->deltaDistY;
-        }
+    if (ray->ray_x < 0)
+    {
+        ray->step_x = -1;
+        ray->sideDistX = (game->player.x - ray->map_x) * ray->deltaDistX;
+    }
+    else
+    {
+        ray->step_x = 1;
+        ray->sideDistX = (ray->map_x + 1.0 - game->player.x) * ray->deltaDistX;
+    }
+    if (ray->ray_y < 0)
+    {
+        ray->step_y = -1;
+        ray->sideDistY = (game->player.y - ray->map_y) * ray->deltaDistY;
+    }
+    else
+    {
+        ray->step_y = 1;
+        ray->sideDistY = (ray->map_y + 1.0 - game->player.y) * ray->deltaDistY;
+    }
 }
 
 void dist_wall(t_game *game, t_raycasting *ray)
@@ -116,6 +116,9 @@ int raycasting(t_game *game)
 			&game->mlx_img.bits_per_pixel, &game->mlx_img.line_length,
 			&game->mlx_img.endian);
     ray = &game->raycast;
+    move_y_player(game);
+    move_x_player(game);
+    move_cam(game);
     i = 0;
     while(i < WIN_WIDTH)
     {

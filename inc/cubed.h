@@ -82,8 +82,8 @@ typedef struct s_game {
 # define WEST 4
 
 # define FOV 0.9
-# define MOVE_SPEED 0.3
-# define ROT_SPEED 0.1
+# define MOVE_SPEED 0.04
+# define ROT_SPEED 0.04
 
 # define ESC 53
 # define UP 13
@@ -144,9 +144,10 @@ char    *code_erreur(int code);
 
 //keyboard
 int key_events(int keycode, t_game *game);
-void move_cam(int keycode, t_game *game);
-void move_x_player(int keycode, t_game *game);
-void move_y_player(int keycode, t_game *game);
+int key_release(int keycode, t_game *game);
+void move_cam(t_game *game);
+void move_x_player(t_game *game);
+void move_y_player(t_game *game);
 
 
 #endif

@@ -78,6 +78,7 @@ int main(int argc, char **argv)
     get_file(argv, &game);
     mlx_loop_hook(game.mlx, &raycasting, &game);
     mlx_hook(game.mlx_win, 2, 0, &key_events, &game);
+    mlx_hook(game.mlx_win, 3, 0, &key_release, &game);
 	mlx_hook(game.mlx_win, 17, 0, &close_window, &game);
     mlx_loop(game.mlx);
 }

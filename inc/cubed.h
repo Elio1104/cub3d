@@ -106,36 +106,45 @@ typedef struct s_game {
 //main
 void    get_file(char **argv, t_game *game);
 void	checking_arg(int argc, char **argv, t_game *game);
-int close_window(t_game *game);
+void    init_player(t_game *game);
+void    init_struct(t_game *game);
+int     close_window(t_game *game);
 
 //map
 char    **get_map(int fd, char *line);
 int     check_nswe(t_game *game);
+void    get_player(t_game *game);
 void    check_layout(t_game *game);
 
 //raycasting
-int raycasting(t_game *game);
+int     raycasting(t_game *game);
+void    draw_line(t_game *game, t_raycasting *ray, int i);
+void    dist_wall(t_game *game, t_raycasting *ray);
+void    init_side_dist(t_game *game, t_raycasting *ray);
+void    init_value(t_game *game, t_raycasting *ray, int i);
+void    draw_verline(t_game *game, int i, int draw_start, int draw_end, int color);
+void    my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 //texture
-void free_close(char *str, char **tab);
+void    free_close(char *str, char **tab);
 void    stock_texture(t_game *game, char **tab, char **texture, char *line);
-int is_texture(t_game *game, char *line);
-void check_texture(t_game *game, char *line);
-char *get_texture(t_game *game);
+int     is_texture(t_game *game, char *line);
+void    check_texture(t_game *game, char *line);
+char    *get_texture(t_game *game);
 
 //rgb
-int line_not_empty(char *str);
-int	create_trgb(int t, int r, int g, int b);
-int get_rgb(char **tab);
-void stock_rgb(t_game *game, char **tab, int *rgb, char *line);
+int     line_not_empty(char *str);
+int     create_trgb(int t, int r, int g, int b);
+int     get_rgb(char **tab);
+void    stock_rgb(t_game *game, char **tab, int *rgb, char *line);
 
 
 //utils
-void free_tab(char **tab);
-void free_texture(t_game *game);
-void free_struct(t_game *game);
-double ft_abs(double x);
-void print_map(char **map);
+void    free_tab(char **tab);
+void    free_texture(t_game *game);
+void    free_struct(t_game *game);
+double  ft_abs(double x);
+void    print_map(char **map);
 
 //error
 void    ft_error(char *str, t_game *game);
@@ -145,9 +154,9 @@ char    *code_erreur(int code);
 //keyboard
 int key_events(int keycode, t_game *game);
 int key_release(int keycode, t_game *game);
-void move_cam(t_game *game);
-void move_x_player(t_game *game);
 void move_y_player(t_game *game);
+void move_x_player(t_game *game);
+void move_cam(t_game *game);
 
 
 #endif

@@ -145,7 +145,8 @@ void    init_value(t_game *game, t_raycasting *ray, int i);
 //draw
 void            my_mlx_pixel_put(t_data *data, int x, int y, int color);
 unsigned int    my_mlx_get_color(t_data *data, int x, int y);
-void            draw_verline(t_game *game, int i, int draw_start, int draw_end, int color);
+void	draw_ceilling(t_game *game, int i, int draw_start, int draw_end);
+void	draw_floor(t_game *game, int i, int draw_start, int draw_end);
 void            draw_line(t_game *game, t_raycasting *ray, int i);
 void            draw_texture(t_game *game, t_raycasting *ray, int text_x, int i);
 

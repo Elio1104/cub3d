@@ -30,14 +30,24 @@ unsigned int	my_mlx_get_color(t_data *data, int x, int y)
 	return (color);
 }
 
-void	draw_verline(t_game *game, int i, int draw_start, int draw_end, int color)
+void	draw_ceilling(t_game *game, int i, int draw_start, int draw_end)
 {
 	while (draw_start <= draw_end)
 	{
-		my_mlx_pixel_put(&game->mlx_img, i, draw_start, color);
+		my_mlx_pixel_put(&game->mlx_img, i, draw_start, game->texture.ceilling);
 		draw_start++;
 	}
 }
+
+void	draw_floor(t_game *game, int i, int draw_start, int draw_end)
+{
+	while (draw_start <= draw_end)
+	{
+		my_mlx_pixel_put(&game->mlx_img, i, draw_start, game->texture.floor);
+		draw_start++;
+	}
+}
+
 
 void	draw_line(t_game *game, t_raycasting *ray, int i)
 {
@@ -51,10 +61,9 @@ void	draw_line(t_game *game, t_raycasting *ray, int i)
 	if (ray->draw_end >= WIN_HEIGHT)
 		ray->draw_end = WIN_HEIGHT - 1;
 	if (ray->draw_start != 0)
-		draw_verline(game, i, 0, ray->draw_start, game->texture.ceilling);
+		draw_ceilling(game, i, 0, ray->draw_start);
 	if (ray->draw_end != WIN_HEIGHT - 1)
-		draw_verline(game, i, ray->draw_end,
-			WIN_HEIGHT - 1, game->texture.floor);
+		draw_floor(game, i, ray->draw_end, WIN_HEIGHT - 1);
 	draw_texture(game, ray, text_x, i);
 }
 
@@ -66,7 +75,7 @@ void	draw_texture(t_game *game, t_raycasting *ray, int text_x, int i)
 	int		color;
 
 	j = 0;
-	step = 1.0 * texHeight / ray->line_height;
+	step = 1.0 * TEX_HEIGHT / ray->line_height;
 	pos = (ray->draw_start - WIN_HEIGHT / 2 + ray->line_height / 2) * step;
 	while (j + ray->draw_start < ray->draw_end)
 	{

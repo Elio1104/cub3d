@@ -47,6 +47,9 @@ typedef struct s_raycasting {
     int step_y;
     int hit;
     int side;
+    int line_height;
+    int draw_start;
+    int draw_end;
     double sideDistX;
     double sideDistY;
     double deltaDistX;

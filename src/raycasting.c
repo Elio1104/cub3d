@@ -96,62 +96,59 @@ void dist_wall(t_game *game, t_raycasting *ray)
         ray->wall_distance = (ray->sideDistY - ray->deltaDistY);
 }
 
-void draw_line(t_game *game, t_raycasting *ray, int i)
+void draw_texture(t_game *game, t_raycasting *ray, int text_x, int i)
 {
-    int lineHeight;
-    int drawStart;
-    int drawEnd;
-    int color;
-
-
-    double wallX; //where exactly the wall was hit
-    if (ray->side == 0)
-        wallX = game->player.y + ray->wall_distance * ray->ray_y;
-    else           
-        wallX = game->player.x + ray->wall_distance * ray->ray_x;
-    wallX -= floor((wallX));
-
-      //x coordinate on the texture
-      int texX = (int)(wallX * (double)(texWidth));
-      if (ray->side == 0 && ray->ray_x > 0)
-        texX = texWidth - texX - 1;
-      if (ray->side == 1 && ray->ray_y < 0)
-        texX = texWidth - texX - 1;
-
-
-    lineHeight = (int)(WIN_HEIGHT / ray->wall_distance);
-    drawStart = -lineHeight / 2 + WIN_HEIGHT / 2;
-    if(drawStart < 0)
-        drawStart = 0;
-    drawEnd = lineHeight / 2 + WIN_HEIGHT / 2;
-    if(drawEnd >= WIN_HEIGHT)
-        drawEnd = WIN_HEIGHT - 1;
-    if(ray->side == 0)
-        color /= 2;
-    if (drawStart != 0)
-        draw_verline(game, i, 0, drawStart, game->texture.ceilling);
-    if (drawEnd != WIN_HEIGHT - 1)
-        draw_verline(game, i, drawEnd , WIN_HEIGHT - 1, game->texture.floor);
     int j;
     double step;
     double pos;
+    int color;
+
     j = 0;
-    step = 1.0 * texHeight / lineHeight;
-    pos = (drawStart - WIN_HEIGHT / 2 + lineHeight / 2) * step;
-    while (j + drawStart < drawEnd)
+    step = 1.0 * texHeight / ray->line_height;
+    pos = (ray->draw_start - WIN_HEIGHT / 2 + ray->line_height / 2) * step;
+    while (j + ray->draw_start < ray->draw_end)
     {
-        if(ray->side == 1 && ray->ray_y < 0)
-            color = my_mlx_get_color(&game->t_north, texX, (int)pos);
-        else if(ray->side == 1 && ray->ray_y > 0)
-            color = my_mlx_get_color(&game->t_south, texX, (int)pos);
-        else if(ray->side == 0 && ray->ray_x < 0)
-            color = my_mlx_get_color(&game->t_west, texX, (int)pos);
+        if(game->raycast.side == 1 && game->raycast.ray_y < 0)
+            color = my_mlx_get_color(&game->t_north, text_x, (int)pos);
+        else if(game->raycast.side == 1 && game->raycast.ray_y > 0)
+            color = my_mlx_get_color(&game->t_south, text_x, (int)pos);
+        else if(game->raycast.side == 0 && game->raycast.ray_x < 0)
+            color = my_mlx_get_color(&game->t_west, text_x, (int)pos);
         else
-            color = my_mlx_get_color(&game->t_east, texX, (int)pos);
-        my_mlx_pixel_put(&game->mlx_img, i, j + drawStart, color);
+            color = my_mlx_get_color(&game->t_east, text_x, (int)pos);
+        my_mlx_pixel_put(&game->mlx_img, i, j + ray->draw_start, color);
         pos += step;
         j++;
     }
+}
+
+void draw_line(t_game *game, t_raycasting *ray, int i)
+{
+    double wall_x; //where exactly the wall was hit
+    int text_x;
+
+    if (ray->side == 0)
+        wall_x = game->player.y + ray->wall_distance * ray->ray_y;
+    else           
+        wall_x = game->player.x + ray->wall_distance * ray->ray_x;
+    wall_x -= floor((wall_x));
+    text_x = (int)(wall_x * (double)(texWidth));
+    if (ray->side == 0 && ray->ray_x > 0)
+        text_x = texWidth - text_x - 1;
+    if (ray->side == 1 && ray->ray_y < 0)
+        text_x = texWidth - text_x - 1;
+    ray->line_height = (int)(WIN_HEIGHT / ray->wall_distance);
+    ray->draw_start = -ray->line_height / 2 + WIN_HEIGHT / 2;
+    if(ray->draw_start < 0)
+        ray->draw_start = 0;
+    ray->draw_end = ray->line_height / 2 + WIN_HEIGHT / 2;
+    if(ray->draw_end >= WIN_HEIGHT)
+        ray->draw_end = WIN_HEIGHT - 1;
+    if (ray->draw_start != 0)
+        draw_verline(game, i, 0, ray->draw_start, game->texture.ceilling);
+    if (ray->draw_end != WIN_HEIGHT - 1)
+        draw_verline(game, i, ray->draw_end , WIN_HEIGHT - 1, game->texture.floor);
+    draw_texture(game, ray, text_x, i);
 }
 
 int raycasting(t_game *game)

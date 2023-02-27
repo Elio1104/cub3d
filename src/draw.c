@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/27 15:09:11 by alondot           #+#    #+#             */
+/*   Updated: 2023/02/27 15:10:07 by alondot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cubed.h"
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
@@ -32,7 +44,7 @@ void	draw_line(t_game *game, t_raycasting *ray, int i)
 	double	wall_x;
 	int		text_x;
 
-    calculate_text_x(game, ray, &wall_x, &text_x);
+	calculate_text_x(game, ray, &wall_x, &text_x);
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
 	ray->draw_end = ray->line_height / 2 + WIN_HEIGHT / 2;

@@ -115,7 +115,6 @@ void    get_file(char **argv, t_game *game);
 void	checking_arg(int argc, char **argv, t_game *game);
 void    init_player(t_game *game);
 void    init_struct(t_game *game);
-int     close_window(t_game *game);
 
 //map
 char    **get_map(int fd, char *line);
@@ -152,10 +151,12 @@ void    free_tab(char **tab);
 void    free_texture(t_game *game);
 void    free_struct(t_game *game);
 double  ft_abs(double x);
+int     close_window(t_game *game);
 
 //error
 void    ft_error(char *str, t_game *game);
 void    ft_error_code(int code, t_game *game);
+void check_error_map(t_game *game, int i, int j);
 char    *code_erreur(int code);
 
 //keyboard

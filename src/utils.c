@@ -43,3 +43,10 @@ double ft_abs(double x)
       return (x);
     return (-x);
 }
+
+int	close_window(t_game *game)
+{
+	free_struct(game);
+	mlx_destroy_window(game->mlx, game->mlx_win);
+	exit (1);
+}

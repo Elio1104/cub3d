@@ -60,32 +60,24 @@ void	move_cam(t_game *game)
 {
 	double	old_dir_x;
 	double	old_plane_x;
+    int nb;
 
-	if (game->move.cam_left == 1)
+	if (game->move.cam_left == 1 || game->move.cam_right == 1)
 	{
+        if(game->move.cam_left)
+            nb = -1;
+        else
+            nb = 1;
 		old_dir_x = game->player.dir_x;
-		game->player.dir_x = game->player.dir_x * cos(-ROT_SPEED)
-			- game->player.dir_y * sin(-ROT_SPEED);
-		game->player.dir_y = old_dir_x * sin(-ROT_SPEED)
-			+ game->player.dir_y * cos(-ROT_SPEED);
+		game->player.dir_x = game->player.dir_x * cos(ROT_SPEED * nb)
+			- game->player.dir_y * sin(ROT_SPEED * nb);
+		game->player.dir_y = old_dir_x * sin(ROT_SPEED * nb)
+			+ game->player.dir_y * cos(ROT_SPEED * nb);
 		old_plane_x = game->player.plane_x;
-		game->player.plane_x = game->player.plane_x * cos(-ROT_SPEED)
-			- game->player.plane_y * sin(-ROT_SPEED);
-		game->player.plane_y = old_plane_x * sin(-ROT_SPEED)
-			+ game->player.plane_y * cos(-ROT_SPEED);
-	}
-	if (game->move.cam_right == 1)
-	{
-		old_dir_x = game->player.dir_x;
-		game->player.dir_x = game->player.dir_x * cos(ROT_SPEED)
-			- game->player.dir_y * sin(ROT_SPEED);
-		game->player.dir_y = old_dir_x * sin(ROT_SPEED)
-			+ game->player.dir_y * cos(ROT_SPEED);
-		old_plane_x = game->player.plane_x;
-		game->player.plane_x = game->player.plane_x * cos(ROT_SPEED)
-			- game->player.plane_y * sin(ROT_SPEED);
-		game->player.plane_y = old_plane_x * sin(ROT_SPEED)
-			+ game->player.plane_y * cos(ROT_SPEED);
+		game->player.plane_x = game->player.plane_x * cos(ROT_SPEED * nb)
+			- game->player.plane_y * sin(ROT_SPEED * nb);
+		game->player.plane_y = old_plane_x * sin(ROT_SPEED * nb)
+			+ game->player.plane_y * cos(ROT_SPEED * nb);
 	}
 }
 

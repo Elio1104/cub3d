@@ -8,7 +8,7 @@ void free_close(char *str, char **tab)
 
 void    stock_texture(t_game *game, char **tab, char **texture, char *line)
 {
-    if(!tab[0] || !tab[1] || tab[2])
+    if(!tab[0] || !tab[1] || (tab[2] && *tab[2] != '\n'))
     {
         free_close(line, tab);
         ft_error("Wrong arguments", game);
@@ -61,6 +61,31 @@ void check_texture(t_game *game, char *line)
     }
 }
 
+t_data texture_load(char *path, t_game *game)
+{
+    t_data	obj;
+    int i;
+
+    i = ft_strlen(path);
+    if(path[i - 1] == '\n')
+        path[i - 1] = '\0';
+	obj.img = mlx_xpm_file_to_image(game->mlx, path,
+			&obj.bits_per_pixel, &obj.line_length);
+	if (obj.img == 0)
+		ft_error("Load texture", game);
+	obj.addr = mlx_get_data_addr(obj.img, &obj.bits_per_pixel,
+			&obj.line_length, &obj.endian);
+	return (obj);
+}
+
+void init_texture(t_game *game)
+{
+    game->t_north = texture_load(game->texture.north, game);
+    game->t_south = texture_load(game->texture.south, game);
+    game->t_east = texture_load(game->texture.east, game);
+    game->t_west = texture_load(game->texture.west, game);
+}
+
 char    *get_texture(t_game *game)
 {
     char *line;
@@ -80,5 +105,6 @@ char    *get_texture(t_game *game)
         free(line);
     }
     check_texture(game, line);
+    init_texture(game);
     return (line);
 }

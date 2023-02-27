@@ -8,6 +8,16 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *) dst = color;
 }
 
+unsigned int	my_mlx_get_color(t_data *data, int x, int y)
+{
+	char			*dst;
+	unsigned int	color;
+
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	color = *(unsigned int *)dst;
+	return (color);
+}
+
 void draw_verline(t_game *game, int i, int draw_start, int draw_end, int color)
 {
     while(draw_start <= draw_end)
@@ -88,22 +98,60 @@ void dist_wall(t_game *game, t_raycasting *ray)
 
 void draw_line(t_game *game, t_raycasting *ray, int i)
 {
-    int lineHeight = (int)(WIN_HEIGHT / ray->wall_distance);
-    int drawStart = -lineHeight / 2 + WIN_HEIGHT / 2;
+    int lineHeight;
+    int drawStart;
+    int drawEnd;
+    int color;
+
+
+    double wallX; //where exactly the wall was hit
+    if (ray->side == 0)
+        wallX = game->player.y + ray->wall_distance * ray->ray_y;
+    else           
+        wallX = game->player.x + ray->wall_distance * ray->ray_x;
+    wallX -= floor((wallX));
+
+      //x coordinate on the texture
+      int texX = (int)(wallX * (double)(texWidth));
+      if (ray->side == 0 && ray->ray_x > 0)
+        texX = texWidth - texX - 1;
+      if (ray->side == 1 && ray->ray_y < 0)
+        texX = texWidth - texX - 1;
+
+
+    lineHeight = (int)(WIN_HEIGHT / ray->wall_distance);
+    drawStart = -lineHeight / 2 + WIN_HEIGHT / 2;
     if(drawStart < 0)
         drawStart = 0;
-    int drawEnd = lineHeight / 2 + WIN_HEIGHT / 2;
+    drawEnd = lineHeight / 2 + WIN_HEIGHT / 2;
     if(drawEnd >= WIN_HEIGHT)
         drawEnd = WIN_HEIGHT - 1;
-    int color = 16711680;
     if(ray->side == 0)
         color /= 2;
     if (drawStart != 0)
         draw_verline(game, i, 0, drawStart, game->texture.ceilling);
     if (drawEnd != WIN_HEIGHT - 1)
         draw_verline(game, i, drawEnd , WIN_HEIGHT - 1, game->texture.floor);
-    draw_verline(game, i, drawStart, drawEnd, color);
-
+    int j;
+    double step;
+    double pos;
+    j = 0;
+    step = 1.0 * texHeight / lineHeight;
+    pos = (drawStart - WIN_HEIGHT / 2 + lineHeight / 2) * step;
+    while (j + drawStart < drawEnd)
+    {
+        if(ray->side == 1 && ray->ray_y < 0)
+            color = my_mlx_get_color(&game->t_north, texX, (int)pos);
+        else if(ray->side == 1 && ray->ray_y > 0)
+            color = my_mlx_get_color(&game->t_south, texX, (int)pos);
+        else if(ray->side == 0 && ray->ray_x < 0)
+            color = my_mlx_get_color(&game->t_west, texX, (int)pos);
+        else
+            color = my_mlx_get_color(&game->t_east, texX, (int)pos);
+        my_mlx_pixel_put(&game->mlx_img, i, j + drawStart, color);
+        pos += step;
+        j++;
+    }
 }
 
 int raycasting(t_game *game)

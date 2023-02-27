@@ -74,6 +74,10 @@ typedef struct s_game {
     t_texture   texture;
     t_player    player;
     t_raycasting raycast;
+    t_data      t_north;
+    t_data      t_south;
+    t_data      t_east;
+    t_data      t_west;
 }   t_game;
 
 # define NORTH 1

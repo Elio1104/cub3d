@@ -49,6 +49,16 @@ int	get_rgb(char **tab)
 	return (create_trgb(0, r, g, b));
 }
 
+void check_nb_arg(t_game *game, char **new_tab, char *line, char **tab)
+{
+    if (!new_tab[0] || !new_tab[1] || !new_tab[2] || new_tab[3])
+	{
+		free_tab(new_tab);
+		free_close(line, tab);
+		ft_error("Wrong rgb", game);
+	}
+}
+
 void	stock_rgb(t_game *game, char **tab, int *rgb, char *line)
 {
 	char	**new_tab;
@@ -64,12 +74,7 @@ void	stock_rgb(t_game *game, char **tab, int *rgb, char *line)
 		free_close(line, tab);
 		ft_error("Malloc ft_split failed", game);
 	}
-	if (!new_tab[0] || !new_tab[1] || !new_tab[2] || new_tab[3])
-	{
-		free_tab(new_tab);
-		free_close(line, tab);
-		ft_error("Wrong rgb", game);
-	}
+    check_nb_arg(game, new_tab, line, tab);
 	*rgb = get_rgb(new_tab);
 	free_tab(new_tab);
 	if (*rgb == -1)

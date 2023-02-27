@@ -1,5 +1,17 @@
-#ifndef CUB3D_H
-# define CUB3D_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cubed.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/27 14:52:04 by alondot           #+#    #+#             */
+/*   Updated: 2023/02/27 15:07:27 by alondot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef CUBED_H
+# define CUBED_H
 
 # include "../lib/libft/includes/libft.h"
 # include "../lib/libft/includes/ft_printf.h"
@@ -17,71 +29,71 @@ typedef struct s_data{
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}				t_data;
+}	t_data;
 
 typedef struct s_texture {
-    char    *north;
-    char    *south;
-    char    *east;
-    char    *west;
-    int     floor;
-    int     ceilling;
-}   t_texture;
+	char	*north;
+	char	*south;
+	char	*east;
+	char	*west;
+	int		floor;
+	int		ceilling;
+}	t_texture;
 
 typedef struct s_move {
-    int move_up;
-    int move_down;
-    int move_left;
-    int move_right;
-    int cam_left;
-    int cam_right;
-}   t_move;
+	int	move_up;
+	int	move_down;
+	int	move_left;
+	int	move_right;
+	int	cam_left;
+	int	cam_right;
+}	t_move;
 
 typedef struct s_raycasting {
-    double ray_x;
-    double ray_y;
-    double camera_x;
-    int map_x;
-    int map_y;
-    int step_x;
-    int step_y;
-    int hit;
-    int side;
-    int line_height;
-    int draw_start;
-    int draw_end;
-    double sideDistX;
-    double sideDistY;
-    double deltaDistX;
-    double deltaDistY;
-    double wall_distance;
-}   t_raycasting;
+	double	ray_x;
+	double	ray_y;
+	double	camera_x;
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	double	sideDistX;
+	double	sideDistY;
+	double	deltaDistX;
+	double	deltaDistY;
+	double	wall_distance;
+}	t_raycasting;
 
 typedef struct s_player{
-    double x;
-    double y;
-    double dir_x;
-    double dir_y;
-    double plane_x;
-    double plane_y;
-}   t_player;
+	double	x;
+	double	y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+}	t_player;
 
 typedef struct s_game {
-    char        **map;
-    t_data      mlx_img;
-    int         fd;
-    int         orientation;
-    void        *mlx;
-    void        *mlx_win;
-    t_move      move;
-    t_texture   texture;
-    t_player    player;
-    t_raycasting raycast;
-    t_data      t_north;
-    t_data      t_south;
-    t_data      t_east;
-    t_data      t_west;
-}   t_game;
+	char			**map;
+	t_data			mlx_img;
+	int				fd;
+	int				orientation;
+	void			*mlx;
+	void			*mlx_win;
+	t_move			move;
+	t_texture		texture;
+	t_player		player;
+	t_raycasting	raycast;
+	t_data			t_north;
+	t_data			t_south;
+	t_data			t_east;
+	t_data			t_west;
+}	t_game;
 
 # define NORTH 1
 # define SOUTH 2
@@ -102,8 +114,8 @@ typedef struct s_game {
 
 # define WIN_WIDTH 1366
 # define WIN_HEIGHT 768
-# define texWidth 64
-# define texHeight 64
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
 
 # define NO_PL 101
 # define TOO_MUCH_PL 102
@@ -111,60 +123,64 @@ typedef struct s_game {
 # define WRONG_LAYOUT 104
 
 //main
-void    get_file(char **argv, t_game *game);
+void	get_file(char **argv, t_game *game);
 void	checking_arg(int argc, char **argv, t_game *game);
-void    init_player(t_game *game);
-void    init_struct(t_game *game);
+void	init_player(t_game *game);
+void	init_struct(t_game *game);
 
 //map
-char    **get_map(int fd, char *line);
-void    check_nswe(t_game *game);
-int    nswe(t_game *game, int i, int j);
-void    get_player(t_game *game);
-void    check_layout(t_game *game);
+char	**get_map(int fd, char *line);
+void	check_nswe(t_game *game);
+int		nswe(t_game *game, int i, int j);
+void	get_player(t_game *game);
+void	check_layout(t_game *game);
 
 //raycasting
 int     raycasting(t_game *game);
-void    draw_line(t_game *game, t_raycasting *ray, int i);
+void    calculate_text_x(t_game *game, t_raycasting *ray, double *wall_x, int *text_x);
 void    dist_wall(t_game *game, t_raycasting *ray);
 void    init_side_dist(t_game *game, t_raycasting *ray);
 void    init_value(t_game *game, t_raycasting *ray, int i);
-void    draw_verline(t_game *game, int i, int draw_start, int draw_end, int color);
-void    my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
+//draw
+void            my_mlx_pixel_put(t_data *data, int x, int y, int color);
+unsigned int    my_mlx_get_color(t_data *data, int x, int y);
+void            draw_verline(t_game *game, int i, int draw_start, int draw_end, int color);
+void            draw_line(t_game *game, t_raycasting *ray, int i);
+void            draw_texture(t_game *game, t_raycasting *ray, int text_x, int i);
 
 //texture
-void    free_close(char *str, char **tab);
-void    stock_texture(t_game *game, char **tab, char **texture, char *line);
-int     is_texture(t_game *game, char *line);
-void    check_texture(t_game *game, char *line);
-char    *get_texture(t_game *game);
+void	free_close(char *str, char **tab);
+void	stock_texture(t_game *game, char **tab, char **texture, char *line);
+int		is_texture(t_game *game, char *line);
+void	check_texture(t_game *game, char *line);
+char	*get_texture(t_game *game);
 
 //rgb
-int     line_not_empty(char *str);
-int     create_trgb(int t, int r, int g, int b);
-int     get_rgb(char **tab);
-void    stock_rgb(t_game *game, char **tab, int *rgb, char *line);
-
+int		line_not_empty(char *str);
+int		create_trgb(int t, int r, int g, int b);
+int		get_rgb(char **tab);
+void	stock_rgb(t_game *game, char **tab, int *rgb, char *line);
+void    check_nb_arg(t_game *game, char **new_tab, char *line, char **tab);
 
 //utils
-void    free_tab(char **tab);
-void    free_texture(t_game *game);
-void    free_struct(t_game *game);
-double  ft_abs(double x);
-int     close_window(t_game *game);
+void	free_tab(char **tab);
+void	free_texture(t_game *game);
+void	free_struct(t_game *game);
+double	ft_abs(double x);
+int		close_window(t_game *game);
 
 //error
-void    ft_error(char *str, t_game *game);
-void    ft_error_code(int code, t_game *game);
-void check_error_map(t_game *game, int i, int j);
-char    *code_erreur(int code);
+void	ft_error(char *str, t_game *game);
+void	ft_error_code(int code, t_game *game);
+void	check_error_map(t_game *game, int i, int j);
+char	*code_erreur(int code);
 
 //keyboard
-int key_events(int keycode, t_game *game);
-int key_release(int keycode, t_game *game);
-void move_y_player(t_game *game);
-void move_x_player(t_game *game);
-void move_cam(t_game *game);
-
+int		key_events(int keycode, t_game *game);
+int		key_release(int keycode, t_game *game);
+void	move_y_player(t_game *game);
+void	move_x_player(t_game *game);
+void	move_cam(t_game *game);
 
 #endif

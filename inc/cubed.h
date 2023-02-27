@@ -62,10 +62,10 @@ typedef struct s_raycasting {
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
-	double	sideDistX;
-	double	sideDistY;
-	double	deltaDistX;
-	double	deltaDistY;
+	double	side_x;
+	double	side_y;
+	double	delta_x;
+	double	delta_y;
 	double	wall_distance;
 }	t_raycasting;
 
@@ -145,7 +145,6 @@ void			init_value(t_game *game, t_raycasting *ray, int i);
 
 //draw
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
-unsigned int	my_mlx_get_color(t_data *data, int x, int y);
 void			draw_ceilling(t_game *game, int i,
 					int draw_start, int draw_end);
 void			draw_floor(t_game *game, int i, int draw_start, int draw_end);
@@ -154,12 +153,17 @@ void			draw_texture(t_game *game,
 					t_raycasting *ray, int text_x, int i);
 
 //texture
-void			free_close(char *str, char **tab);
+unsigned int	my_mlx_get_color(t_data *data, int x, int y);
+void			check_texture(t_game *game, char *line);
+t_data			texture_load(char *path, t_game *game);
+void			init_texture(t_game *game);
+char			*get_texture(t_game *game);
+
+//texture_bis
+int				is_texture(t_game *game, char *line);
+int				strcmp_texture(t_game *game, char **tab, char *line);
 void			stock_texture(t_game *game,
 					char **tab, char **texture, char *line);
-int				is_texture(t_game *game, char *line);
-void			check_texture(t_game *game, char *line);
-char			*get_texture(t_game *game);
 
 //rgb
 int				line_not_empty(char *str);
@@ -177,6 +181,7 @@ double			ft_abs(double x);
 int				close_window(t_game *game);
 
 //error
+void			free_close(char *str, char **tab);
 void			ft_error(char *str, t_game *game);
 void			ft_error_code(int code, t_game *game);
 void			check_error_map(t_game *game, int i, int j);

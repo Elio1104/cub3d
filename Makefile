@@ -31,7 +31,7 @@ WHITE		=	\033[0;97m
 
 # Sources
 
-SRC_FILES	=	cubed raycasting draw error map rgb texture utils keyboard
+SRC_FILES	=	cubed raycasting draw error map rgb texture texture_bis utils keyboard
 SRC 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ 		= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 

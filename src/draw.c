@@ -20,16 +20,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int *) dst = color;
 }
 
-unsigned int	my_mlx_get_color(t_data *data, int x, int y)
-{
-	char			*dst;
-	unsigned int	color;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	color = *(unsigned int *)dst;
-	return (color);
-}
-
 void	draw_ceilling(t_game *game, int i, int draw_start, int draw_end)
 {
 	while (draw_start <= draw_end)

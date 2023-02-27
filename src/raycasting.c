@@ -20,13 +20,13 @@ void	init_value(t_game *game, t_raycasting *ray, int i)
 	ray->map_x = (int)game->player.x;
 	ray->map_y = (int)game->player.y;
 	if (ray->ray_x == 0)
-		ray->deltaDistX = 1e30;
+		ray->delta_x = 1e30;
 	else
-		ray->deltaDistX = ft_abs(1 / ray->ray_x);
+		ray->delta_x = ft_abs(1 / ray->ray_x);
 	if (ray->ray_y == 0)
-		ray->deltaDistY = 1e30;
+		ray->delta_y = 1e30;
 	else
-		ray->deltaDistY = ft_abs(1 / ray->ray_y);
+		ray->delta_y = ft_abs(1 / ray->ray_y);
 }
 
 void	init_side_dist(t_game *game, t_raycasting *ray)
@@ -34,22 +34,22 @@ void	init_side_dist(t_game *game, t_raycasting *ray)
 	if (ray->ray_x < 0)
 	{
 		ray->step_x = -1;
-		ray->sideDistX = (game->player.x - ray->map_x) * ray->deltaDistX;
+		ray->side_x = (game->player.x - ray->map_x) * ray->delta_x;
 	}
 	else
 	{
 		ray->step_x = 1;
-		ray->sideDistX = (ray->map_x + 1.0 - game->player.x) * ray->deltaDistX;
+		ray->side_x = (ray->map_x + 1.0 - game->player.x) * ray->delta_x;
 	}
 	if (ray->ray_y < 0)
 	{
 		ray->step_y = -1;
-		ray->sideDistY = (game->player.y - ray->map_y) * ray->deltaDistY;
+		ray->side_y = (game->player.y - ray->map_y) * ray->delta_y;
 	}
 	else
 	{
 		ray->step_y = 1;
-		ray->sideDistY = (ray->map_y + 1.0 - game->player.y) * ray->deltaDistY;
+		ray->side_y = (ray->map_y + 1.0 - game->player.y) * ray->delta_y;
 	}
 }
 
@@ -58,15 +58,15 @@ void	dist_wall(t_game *game, t_raycasting *ray)
 	ray->hit = 0;
 	while (ray->hit == 0)
 	{
-		if (ray->sideDistX < ray->sideDistY)
+		if (ray->side_x < ray->side_y)
 		{
-			ray->sideDistX += ray->deltaDistX;
+			ray->side_x += ray->delta_x;
 			ray->map_x += ray->step_x;
 			ray->side = 0;
 		}
 		else
 		{
-			ray->sideDistY += ray->deltaDistY;
+			ray->side_y += ray->delta_y;
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
@@ -76,9 +76,9 @@ void	dist_wall(t_game *game, t_raycasting *ray)
 		}
 	}
 	if (ray->side == 0)
-		ray->wall_distance = (ray->sideDistX - ray->deltaDistX);
+		ray->wall_distance = (ray->side_x - ray->delta_x);
 	else
-		ray->wall_distance = (ray->sideDistY - ray->deltaDistY);
+		ray->wall_distance = (ray->side_y - ray->delta_y);
 }
 
 void	calculate_text_x(t_game *game,
@@ -89,11 +89,11 @@ void	calculate_text_x(t_game *game,
 	else
 		*wall_x = game->player.x + ray->wall_distance * ray->ray_x;
 	*wall_x -= floor((*wall_x));
-	*text_x = (int)(*wall_x * (double)(texWidth));
+	*text_x = (int)(*wall_x * (double)(TEX_WIDTH));
 	if (ray->side == 0 && ray->ray_x > 0)
-		*text_x = texWidth - *text_x - 1;
+		*text_x = TEX_WIDTH - *text_x - 1;
 	if (ray->side == 1 && ray->ray_y < 0)
-		*text_x = texWidth - *text_x - 1;
+		*text_x = TEX_WIDTH - *text_x - 1;
 	ray->line_height = (int)(WIN_HEIGHT / ray->wall_distance);
 	ray->draw_start = -ray->line_height / 2 + WIN_HEIGHT / 2;
 }

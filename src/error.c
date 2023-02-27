@@ -12,6 +12,12 @@
 
 #include "../inc/cubed.h"
 
+void	free_close(char *str, char **tab)
+{
+	free(str);
+	free_tab(tab);
+}
+
 void	ft_error(char *str, t_game *game)
 {
 	printf("Error\n%s\n", str);

@@ -6,13 +6,13 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:42:57 by alondot           #+#    #+#             */
-/*   Updated: 2023/02/27 14:42:58 by alondot          ###   ########.fr       */
+/*   Updated: 2023/02/27 14:47:13 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cubed.h"
 
-void free_close(char *str, char **tab)
+void	free_close(char *str, char **tab)
 {
 	free(str);
 	free_tab(tab);
@@ -20,66 +20,68 @@ void free_close(char *str, char **tab)
 
 void	stock_texture(t_game *game, char **tab, char **texture, char *line)
 {
-	if(!tab[0] || !tab[1] || (tab[2] && *tab[2] != '\n'))
+	if (!tab[0] || !tab[1] || (tab[2] && *tab[2] != '\n'))
 	{
 		free_close(line, tab);
 		ft_error("Wrong arguments", game);
 	}
 	*texture = ft_strdup(tab[1]);
-	if(!*texture)
+	if (!*texture)
 	{
 		free_close(line, tab);
 		ft_error("Malloc in ft_strdup failed", game);
 	}
 }
 
-int is_texture(t_game *game, char *line)
+int	is_texture(t_game *game, char *line)
 {
-	char **tab;
+	char	**tab;
 
 	tab = ft_split(line, ' ');
-	if(!tab)
+	if (!tab)
 	{
 		free(line);
 		ft_error("Malloc split failed", game);
 	}
-	if(ft_strcmp(tab[0], "NO") == 0)
+	if (ft_strcmp(tab[0], "NO") == 0)
 		stock_texture(game, tab, &game->texture.north, line);
-	else if(ft_strcmp(tab[0], "SO") == 0)
+	else if (ft_strcmp(tab[0], "SO") == 0)
 		stock_texture(game, tab, &game->texture.south, line);
-	else if(ft_strcmp(tab[0], "WE") == 0)
+	else if (ft_strcmp(tab[0], "WE") == 0)
 		stock_texture(game, tab, &game->texture.west, line);
-	else if(ft_strcmp(tab[0], "EA") == 0)
+	else if (ft_strcmp(tab[0], "EA") == 0)
 		stock_texture(game, tab, &game->texture.east, line);
-	else if(ft_strcmp(tab[0], "F") == 0)
+	else if (ft_strcmp(tab[0], "F") == 0)
 		stock_rgb(game, tab, &game->texture.ceilling, line);
-	else if(ft_strcmp(tab[0], "C") == 0)
+	else if (ft_strcmp(tab[0], "C") == 0)
 		stock_rgb(game, tab, &game->texture.floor, line);
 	else
 	{
 		free_tab(tab);
-		return(0);
+		return (0);
 	}
 	free_tab(tab);
-	return(1);
+	return (1);
 }
 
-void check_texture(t_game *game, char *line)
+void	check_texture(t_game *game, char *line)
 {
-	if(game->texture.ceilling == -1 || game->texture.floor == -1 || game->texture.south == NULL || game->texture.north == NULL || game->texture.east == NULL || game->texture.west == NULL)
+	if (game->texture.ceilling == -1 || game->texture.floor == -1
+		|| game->texture.south == NULL || game->texture.north == NULL
+		|| game->texture.east == NULL || game->texture.west == NULL)
 	{
 		free(line);
 		ft_error("Not enough texture", game);
 	}
 }
 
-t_data texture_load(char *path, t_game *game)
+t_data	texture_load(char *path, t_game *game)
 {
 	t_data	obj;
-	int i;
+	int		i;
 
 	i = ft_strlen(path);
-	if(path[i - 1] == '\n')
+	if (path[i - 1] == '\n')
 		path[i - 1] = '\0';
 	obj.img = mlx_xpm_file_to_image(game->mlx, path,
 			&obj.bits_per_pixel, &obj.line_length);
@@ -90,7 +92,7 @@ t_data texture_load(char *path, t_game *game)
 	return (obj);
 }
 
-void init_texture(t_game *game)
+void	init_texture(t_game *game)
 {
 	game->t_north = texture_load(game->texture.north, game);
 	game->t_south = texture_load(game->texture.south, game);
@@ -100,20 +102,20 @@ void init_texture(t_game *game)
 
 char	*get_texture(t_game *game)
 {
-	char *line;
+	char	*line;
 
-	while(1)
+	while (1)
 	{
 		line = get_next_line(game->fd);
-		if(!line)
-			break;
-		if(line_not_empty(line) == 0 || line[0] == '\n')
+		if (!line)
+			break ;
+		if (line_not_empty(line) == 0 || line[0] == '\n')
 		{
 			free(line);
 			continue ;
 		}
-		if(!is_texture(game, line))
-			break;
+		if (!is_texture(game, line))
+			break ;
 		free(line);
 	}
 	check_texture(game, line);

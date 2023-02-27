@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   texture_bis.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/27 16:00:54 by alondot           #+#    #+#             */
+/*   Updated: 2023/02/27 16:01:20 by alondot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cubed.h"
 
 void	stock_texture(t_game *game, char **tab, char **texture, char *line)
@@ -15,9 +27,9 @@ void	stock_texture(t_game *game, char **tab, char **texture, char *line)
 	}
 }
 
-int strcmp_texture(t_game *game, char **tab, char *line)
+int	strcmp_texture(t_game *game, char **tab, char *line)
 {
-    if (ft_strcmp(tab[0], "NO") == 0)
+	if (ft_strcmp(tab[0], "NO") == 0)
 		stock_texture(game, tab, &game->texture.north, line);
 	else if (ft_strcmp(tab[0], "SO") == 0)
 		stock_texture(game, tab, &game->texture.south, line);
@@ -48,7 +60,7 @@ int	is_texture(t_game *game, char *line)
 		free(line);
 		ft_error("Malloc split failed", game);
 	}
-    if (strcmp_texture(game, tab, line) == 0)
-        return (0);
-    return (1);
+	if (strcmp_texture(game, tab, line) == 0)
+		return (0);
+	return (1);
 }

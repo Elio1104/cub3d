@@ -119,7 +119,8 @@ int     close_window(t_game *game);
 
 //map
 char    **get_map(int fd, char *line);
-int     check_nswe(t_game *game);
+void    check_nswe(t_game *game);
+int    nswe(t_game *game, int i, int j);
 void    get_player(t_game *game);
 void    check_layout(t_game *game);
 
@@ -151,7 +152,6 @@ void    free_tab(char **tab);
 void    free_texture(t_game *game);
 void    free_struct(t_game *game);
 double  ft_abs(double x);
-void    print_map(char **map);
 
 //error
 void    ft_error(char *str, t_game *game);

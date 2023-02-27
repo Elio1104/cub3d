@@ -11,7 +11,6 @@ void    get_file(char **argv, t_game *game)
     game->map = get_map(game->fd, buf);
     check_nswe(game);
     check_layout(game);
-    print_map(game->map);
     close(game->fd);
     game->fd = 0;
 }

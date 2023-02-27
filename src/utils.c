@@ -43,15 +43,3 @@ double ft_abs(double x)
       return (x);
     return (-x);
 }
-
-void print_map(char **map)
-{
-    int i;
-
-    i = 0;
-    while (map[i])
-    {
-        printf("%d : %s\n", i, map[i]);
-        i++;
-    }
-}

@@ -52,7 +52,30 @@ void get_player(t_game *game)
     }
 }
 
-int check_nswe(t_game *game)
+int nswe(t_game *game, int i, int j)
+{
+    if (game->map[i][j] == 'N' || game->map[i][j] == 'S' || game->map[i][j] == 'W' || game->map[i][j] == 'E')
+    {
+        if (game->orientation != 0)
+            ft_error_code(TOO_MUCH_PL, game);
+        if (game->map[i][j] == 'N')
+            game->orientation = NORTH;
+        if (game->map[i][j] == 'S')
+            game->orientation = SOUTH;
+        if (game->map[i][j] == 'E')
+            game->orientation = EAST;
+        if (game->map[i][j] == 'W')
+            game->orientation = WEST;
+        game->player.x = j + 0.5;
+        game->player.y = i + 0.5;
+        game->map[i][j] = '0';
+    }
+    else if (game->map[i][j] != '1' && game->map[i][j] != '0' && game->map[i][j] != ' ' && game->map[i][j] != '\n')
+        ft_error_code(WRONG_FILL, game);
+	return (0);
+}
+
+void check_nswe(t_game *game)
 {
     int i;
     int j;
@@ -63,32 +86,14 @@ int check_nswe(t_game *game)
         j = 0;
         while(game->map[i][j])
         {
-            if (game->map[i][j] == 'N' || game->map[i][j] == 'S' || game->map[i][j] == 'W' || game->map[i][j] == 'E')
-            {
-                if (game->orientation != 0)
-                    return(TOO_MUCH_PL);
-                if (game->map[i][j] == 'N')
-                    game->orientation = NORTH;
-                if (game->map[i][j] == 'S')
-                    game->orientation = SOUTH;
-                if (game->map[i][j] == 'E')
-                    game->orientation = EAST;
-                if (game->map[i][j] == 'W')
-                    game->orientation = WEST;
-                game->player.x = j + 0.5;
-                game->player.y = i + 0.5;
-                game->map[i][j] = '0';
-            }
-            else if (game->map[i][j] != '1' && game->map[i][j] != '0' && game->map[i][j] != ' ' && game->map[i][j] != '\n')
-                return(WRONG_FILL);
+            nswe(game, i, j);
             j++;
         }
         i++;
     }
     if (game->orientation == 0)
-        return(NO_PL);
+        ft_error_code(NO_PL, game);
     get_player(game);
-    return (0);
 }
 
 char **get_map(int fd, char *line)

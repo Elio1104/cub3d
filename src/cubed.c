@@ -3,16 +3,13 @@
 void    get_file(char **argv, t_game *game)
 {
     char *buf;
-    int ret;
 
 	game->fd = open(argv[1], O_RDONLY);
 	if (game->fd == -1)
 		ft_error("The map could not be read.", game);
     buf = get_texture(game);
     game->map = get_map(game->fd, buf);
-    ret = check_nswe(game);
-    if (ret != 0)
-        ft_error_code(ret, game);
+    check_nswe(game);
     check_layout(game);
     print_map(game->map);
     close(game->fd);

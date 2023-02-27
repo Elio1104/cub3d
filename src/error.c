@@ -19,6 +19,22 @@ void	ft_error(char *str, t_game *game)
 	exit (1);
 }
 
+void check_error_map(t_game *game, int i, int j)
+{
+    if (i == 0 || !(game->map[i - 1][j])
+		|| (game->map[i - 1][j] && game->map[i - 1][j] == ' '))
+	    ft_error_code(WRONG_LAYOUT, game);
+	if (!game->map[i + 1] || !(game->map[i + 1][j])
+		|| (game->map[i + 1][j] && game->map[i + 1][j] == ' '))
+	    ft_error_code(WRONG_LAYOUT, game);
+	if (!(game->map[i][j + 1]) || (game->map[i][j + 1]
+		&& game->map[i][j + 1] == ' '))
+		ft_error_code(WRONG_LAYOUT, game);
+	if (i == 0 || !(game->map[i][j - 1]) || (game->map[i][j - 1]
+		&& game->map[i][j - 1] == ' '))
+		ft_error_code(WRONG_LAYOUT, game);
+}
+
 void	ft_error_code(int code, t_game *game)
 {
 	printf("Error\n%s\n", code_erreur(code));

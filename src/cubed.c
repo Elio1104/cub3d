@@ -70,13 +70,6 @@ void	init_struct(t_game *game)
 	game->mlx_win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
 }
 
-int	close_window(t_game *game)
-{
-	free_struct(game);
-	mlx_destroy_window(game->mlx, game->mlx_win);
-	exit (1);
-}
-
 int	main(int argc, char **argv)
 {
 	t_game	game;

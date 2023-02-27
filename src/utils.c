@@ -47,6 +47,14 @@ void	free_struct(t_game *game)
 	if (game->fd != 0)
 		close(game->fd);
 	free_texture(game);
+    if(game->t_north.img)
+        mlx_destroy_image(game->mlx, game->t_north.img);
+    if(game->t_south.img)
+        mlx_destroy_image(game->mlx, game->t_south.img);
+    if(game->t_east.img)
+        mlx_destroy_image(game->mlx, game->t_east.img);
+    if(game->t_west.img)
+        mlx_destroy_image(game->mlx, game->t_west.img);
 }
 
 double	ft_abs(double x)

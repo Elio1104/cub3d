@@ -57,6 +57,10 @@ void	init_struct(t_game *game)
 	game->texture.south = NULL;
 	game->texture.east = NULL;
 	game->texture.west = NULL;
+    game->t_north.img = NULL;
+    game->t_south.img = NULL;
+    game->t_east.img = NULL;
+    game->t_west.img = NULL;
 	game->move.move_up = 0;
 	game->move.move_down = 0;
 	game->move.move_left = 0;

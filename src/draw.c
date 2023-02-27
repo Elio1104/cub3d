@@ -67,7 +67,7 @@ void	draw_texture(t_game *game, t_raycasting *ray, int text_x, int i)
 	step = 1.0 * TEX_HEIGHT / ray->line_height;
 	pos = (ray->draw_start - WIN_HEIGHT / 2 + ray->line_height / 2) * step;
 	while (j + ray->draw_start < ray->draw_end)
-	{
+    {
 		if (game->raycast.side == 1 && game->raycast.ray_y < 0)
 			color = my_mlx_get_color(&game->t_north, text_x, (int)pos);
 		else if (game->raycast.side == 1 && game->raycast.ray_y > 0)

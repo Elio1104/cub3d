@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:09:11 by alondot           #+#    #+#             */
-/*   Updated: 2023/02/27 15:10:07 by alondot          ###   ########.fr       */
+/*   Updated: 2023/02/27 15:39:15 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	draw_floor(t_game *game, int i, int draw_start, int draw_end)
 		draw_start++;
 	}
 }
-
 
 void	draw_line(t_game *game, t_raycasting *ray, int i)
 {

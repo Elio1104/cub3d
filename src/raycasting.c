@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:30:02 by alondot           #+#    #+#             */
-/*   Updated: 2023/02/27 14:39:03 by alondot          ###   ########.fr       */
+/*   Updated: 2023/02/27 15:38:36 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ void	dist_wall(t_game *game, t_raycasting *ray)
 		ray->wall_distance = (ray->sideDistY - ray->deltaDistY);
 }
 
-void calculate_text_x(t_game *game, t_raycasting *ray, double *wall_x, int *text_x)
+void	calculate_text_x(t_game *game,
+		t_raycasting *ray, double *wall_x, int *text_x)
 {
 	if (ray->side == 0)
 		*wall_x = game->player.y + ray->wall_distance * ray->ray_y;

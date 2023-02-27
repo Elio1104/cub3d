@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:40:11 by alondot           #+#    #+#             */
-/*   Updated: 2023/02/27 14:41:46 by alondot          ###   ########.fr       */
+/*   Updated: 2023/02/27 15:40:28 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ int	get_rgb(char **tab)
 	return (create_trgb(0, r, g, b));
 }
 
-void check_nb_arg(t_game *game, char **new_tab, char *line, char **tab)
+void	check_nb_arg(t_game *game, char **new_tab, char *line, char **tab)
 {
-    if (!new_tab[0] || !new_tab[1] || !new_tab[2] || new_tab[3])
+	if (!new_tab[0] || !new_tab[1] || !new_tab[2] || new_tab[3])
 	{
 		free_tab(new_tab);
 		free_close(line, tab);
@@ -74,7 +74,7 @@ void	stock_rgb(t_game *game, char **tab, int *rgb, char *line)
 		free_close(line, tab);
 		ft_error("Malloc ft_split failed", game);
 	}
-    check_nb_arg(game, new_tab, line, tab);
+	check_nb_arg(game, new_tab, line, tab);
 	*rgb = get_rgb(new_tab);
 	free_tab(new_tab);
 	if (*rgb == -1)

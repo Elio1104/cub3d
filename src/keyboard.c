@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:15:00 by alondot           #+#    #+#             */
-/*   Updated: 2023/02/27 14:24:47 by alondot          ###   ########.fr       */
+/*   Updated: 2023/02/27 15:41:43 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,14 @@ void	move_cam(t_game *game)
 {
 	double	old_dir_x;
 	double	old_plane_x;
-    int nb;
+	int		nb;
 
 	if (game->move.cam_left == 1 || game->move.cam_right == 1)
 	{
-        if(game->move.cam_left)
-            nb = -1;
-        else
-            nb = 1;
+		if (game->move.cam_left)
+			nb = -1;
+		else
+			nb = 1;
 		old_dir_x = game->player.dir_x;
 		game->player.dir_x = game->player.dir_x * cos(ROT_SPEED * nb)
 			- game->player.dir_y * sin(ROT_SPEED * nb);

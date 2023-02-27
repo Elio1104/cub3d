@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:12:19 by alondot           #+#    #+#             */
-/*   Updated: 2023/02/27 14:13:03 by alondot          ###   ########.fr       */
+/*   Updated: 2023/02/27 15:37:55 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ void	ft_error(char *str, t_game *game)
 	exit (1);
 }
 
-void check_error_map(t_game *game, int i, int j)
+void	check_error_map(t_game *game, int i, int j)
 {
-    if (i == 0 || !(game->map[i - 1][j])
+	if (i == 0 || !(game->map[i - 1][j])
 		|| (game->map[i - 1][j] && game->map[i - 1][j] == ' '))
-	    ft_error_code(WRONG_LAYOUT, game);
+		ft_error_code(WRONG_LAYOUT, game);
 	if (!game->map[i + 1] || !(game->map[i + 1][j])
 		|| (game->map[i + 1][j] && game->map[i + 1][j] == ' '))
-	    ft_error_code(WRONG_LAYOUT, game);
+		ft_error_code(WRONG_LAYOUT, game);
 	if (!(game->map[i][j + 1]) || (game->map[i][j + 1]
 		&& game->map[i][j + 1] == ' '))
 		ft_error_code(WRONG_LAYOUT, game);

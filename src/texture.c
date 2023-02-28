@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:42:57 by alondot           #+#    #+#             */
-/*   Updated: 2023/02/27 14:47:13 by alondot          ###   ########.fr       */
+/*   Updated: 2023/02/28 15:39:22 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ t_data	texture_load(char *path, t_game *game)
 void	init_texture(t_game *game)
 {
 	game->t_north = texture_load(game->texture.north, game);
-    printf("%d\n", game->t_north.line_length);
 	game->t_south = texture_load(game->texture.south, game);
 	game->t_east = texture_load(game->texture.east, game);
 	game->t_west = texture_load(game->texture.west, game);

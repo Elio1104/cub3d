@@ -53,6 +53,7 @@ t_data	texture_load(char *path, t_game *game)
 void	init_texture(t_game *game)
 {
 	game->t_north = texture_load(game->texture.north, game);
+    printf("%d\n", game->t_north.line_length);
 	game->t_south = texture_load(game->texture.south, game);
 	game->t_east = texture_load(game->texture.east, game);
 	game->t_west = texture_load(game->texture.west, game);

@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 16:00:54 by alondot           #+#    #+#             */
-/*   Updated: 2023/02/27 16:01:20 by alondot          ###   ########.fr       */
+/*   Updated: 2023/02/28 15:14:16 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 void	stock_texture(t_game *game, char **tab, char **texture, char *line)
 {
+    if (*texture)
+    {
+        free_close(line, tab);
+		ft_error("There is too much texture", game);
+    }
 	if (!tab[0] || !tab[1] || (tab[2] && *tab[2] != '\n'))
 	{
 		free_close(line, tab);
@@ -65,14 +70,14 @@ int	is_texture(t_game *game, char *line)
 	return (1);
 }
 
-int ft_strisdigit(char *str)
+int	ft_strisdigit(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
-		if(!ft_isdigit(str[i]))
+		if (!ft_isdigit(str[i]))
 			return (0);
 		i++;
 	}

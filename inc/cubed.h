@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:52:04 by alondot           #+#    #+#             */
-/*   Updated: 2023/02/27 15:45:46 by alondot          ###   ########.fr       */
+/*   Updated: 2023/02/28 15:13:20 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ int				is_texture(t_game *game, char *line);
 int				strcmp_texture(t_game *game, char **tab, char *line);
 void			stock_texture(t_game *game,
 					char **tab, char **texture, char *line);
-int             ft_strisdigit(char *str);
+int				ft_strisdigit(char *str);
 
 //rgb
 int				line_not_empty(char *str);

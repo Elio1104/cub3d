@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:40:11 by alondot           #+#    #+#             */
-/*   Updated: 2023/02/27 15:40:28 by alondot          ###   ########.fr       */
+/*   Updated: 2023/02/28 15:13:42 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	get_rgb(char **tab)
 	int	r;
 	int	g;
 	int	b;
-	int i;
+	int	i;
 
 	i = ft_strlen(tab[2]);
 	if (tab[2][i - 1] == '\n')

@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:13:46 by alondot           #+#    #+#             */
-/*   Updated: 2023/02/27 14:14:23 by alondot          ###   ########.fr       */
+/*   Updated: 2023/02/28 13:58:23 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ void	init_struct(t_game *game)
 	game->texture.south = NULL;
 	game->texture.east = NULL;
 	game->texture.west = NULL;
-    game->t_north.img = NULL;
-    game->t_south.img = NULL;
-    game->t_east.img = NULL;
-    game->t_west.img = NULL;
+	game->t_north.img = NULL;
+	game->t_south.img = NULL;
+	game->t_east.img = NULL;
+	game->t_west.img = NULL;
 	game->move.move_up = 0;
 	game->move.move_down = 0;
 	game->move.move_left = 0;

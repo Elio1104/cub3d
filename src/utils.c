@@ -6,7 +6,7 @@
 /*   By: alondot <alondot@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 14:48:07 by alondot           #+#    #+#             */
-/*   Updated: 2023/02/27 14:48:55 by alondot          ###   ########.fr       */
+/*   Updated: 2023/02/28 14:01:10 by alondot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ void	free_struct(t_game *game)
 	if (game->fd != 0)
 		close(game->fd);
 	free_texture(game);
-    if(game->t_north.img)
-        mlx_destroy_image(game->mlx, game->t_north.img);
-    if(game->t_south.img)
-        mlx_destroy_image(game->mlx, game->t_south.img);
-    if(game->t_east.img)
-        mlx_destroy_image(game->mlx, game->t_east.img);
-    if(game->t_west.img)
-        mlx_destroy_image(game->mlx, game->t_west.img);
+	if (game->t_north.img)
+		mlx_destroy_image(game->mlx, game->t_north.img);
+	if (game->t_south.img)
+		mlx_destroy_image(game->mlx, game->t_south.img);
+	if (game->t_east.img)
+		mlx_destroy_image(game->mlx, game->t_east.img);
+	if (game->t_west.img)
+		mlx_destroy_image(game->mlx, game->t_west.img);
 }
 
 double	ft_abs(double x)

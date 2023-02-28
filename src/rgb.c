@@ -40,10 +40,17 @@ int	get_rgb(char **tab)
 	int	r;
 	int	g;
 	int	b;
+	int i;
 
+	i = ft_strlen(tab[2]);
+	if (tab[2][i - 1] == '\n')
+		tab[2][i - 1] = '\0';
+	if (!ft_strisdigit(tab[0]) || !ft_strisdigit(tab[1])
+		|| !ft_strisdigit(tab[2]))
+		return (-1);
 	r = ft_atoi(tab[0]);
-	b = ft_atoi(tab[1]);
-	g = ft_atoi(tab[2]);
+	g = ft_atoi(tab[1]);
+	b = ft_atoi(tab[2]);
 	if (r < 0 || r > 255 || b < 0 || b > 255 || g < 0 || g > 255)
 		return (-1);
 	return (create_trgb(0, r, g, b));

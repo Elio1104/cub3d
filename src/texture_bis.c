@@ -38,9 +38,9 @@ int	strcmp_texture(t_game *game, char **tab, char *line)
 	else if (ft_strcmp(tab[0], "EA") == 0)
 		stock_texture(game, tab, &game->texture.east, line);
 	else if (ft_strcmp(tab[0], "F") == 0)
-		stock_rgb(game, tab, &game->texture.ceilling, line);
-	else if (ft_strcmp(tab[0], "C") == 0)
 		stock_rgb(game, tab, &game->texture.floor, line);
+	else if (ft_strcmp(tab[0], "C") == 0)
+		stock_rgb(game, tab, &game->texture.ceilling, line);
 	else
 	{
 		free_tab(tab);
@@ -62,5 +62,19 @@ int	is_texture(t_game *game, char *line)
 	}
 	if (strcmp_texture(game, tab, line) == 0)
 		return (0);
+	return (1);
+}
+
+int ft_strisdigit(char *str)
+{
+	int i;
+
+	i = 0;
+	while(str[i])
+	{
+		if(!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
 	return (1);
 }

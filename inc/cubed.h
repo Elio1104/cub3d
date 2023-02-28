@@ -164,6 +164,7 @@ int				is_texture(t_game *game, char *line);
 int				strcmp_texture(t_game *game, char **tab, char *line);
 void			stock_texture(t_game *game,
 					char **tab, char **texture, char *line);
+int             ft_strisdigit(char *str);
 
 //rgb
 int				line_not_empty(char *str);

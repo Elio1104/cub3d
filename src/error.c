@@ -36,7 +36,7 @@ void	check_error_map(t_game *game, int i, int j)
 	if (!(game->map[i][j + 1]) || (game->map[i][j + 1]
 		&& game->map[i][j + 1] == ' '))
 		ft_error_code(WRONG_LAYOUT, game);
-	if (i == 0 || !(game->map[i][j - 1]) || (game->map[i][j - 1]
+	if (j == 0 || !(game->map[i][j - 1]) || (game->map[i][j - 1]
 		&& game->map[i][j - 1] == ' '))
 		ft_error_code(WRONG_LAYOUT, game);
 }

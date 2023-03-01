@@ -10,7 +10,7 @@ HEADER		=	-I inc
 SRC_DIR		=	src/
 OBJ_DIR		=	obj/
 CC			=	gcc
-FLAGS		=	-Wall -Werror -Wextra -fsanitize=address
+FLAGS		=	-Wall -Werror -Wextra
 RM			=	rm -f
 ECHO		=	echo -e
 MINILIBXCC	=	-I mlx -L lib/mlx -lmlx
